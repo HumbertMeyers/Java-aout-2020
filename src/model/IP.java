@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  */
 
-public class IP{
+public abstract class IP{
 
 	/**
 	 * Une adresse IP sous forme de tableau de bytes.
@@ -33,8 +33,23 @@ public class IP{
 		for (int i = 2; i <= 3 ; i++){
 	        this.ipAdr[i]= (int)(Math.random()*255);
 	    }
-		this.masque = 16;
-		
+		this.masque = 16;	
+	}
+	
+	/**
+	 * Ce constructeur initialise une adresse IP avec les paramètres addr et masque.
+	 * @param addr : l'adresse IP reçue en paramètre.
+	 * @param masque : le masque de réseau reçu en paramètre.
+	 */
+	public IP(String addr) {
+		String[] ipArray;
+		ipArray = addr.split("\\.");
+		this.ipAdr = new int[] {
+				Integer.parseInt(ipArray[0]),
+				Integer.parseInt(ipArray[1]),
+				Integer.parseInt(ipArray[2]),
+				Integer.parseInt(ipArray[3])
+		};
 	}
 	
 	/**
@@ -116,12 +131,12 @@ public class IP{
 	public String toString() {
 		return "Voici les informations concernant votre IP\n" 
 				+ "IP: " + getIpAdr() + "\n" 
-				+ "Masque : " + getMasque() + "\n"
-				+ "Passerelle :" + "\n"
-				+ "DNS : ";
+				+ "Masque : " + getMasque();
 	}
 	
-	public static void main(String[] args) {
+	public abstract int[] string2Integer(String addr);
+	
+	/*public static void main(String[] args) {
 		IP adresse1 = new IP("192.168.1.2", 24);
 		System.out.println(adresse1.toString());
 		IP adresse2 = new IP("192.168.1.254", 16);
@@ -134,7 +149,7 @@ public class IP{
 		System.out.println(apipa2.toString());
 		IP apipa3 = new IP();
 		System.out.println(apipa3.toString());
-	}
+	}*/
 	
 	
 }
