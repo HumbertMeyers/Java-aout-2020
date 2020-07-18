@@ -24,13 +24,18 @@ public class IP{
 	
 	
 	/**
-	 * Ce constructeur initialise une adresse IP à 0.0.0.0 avec un masque 0.
+	 * Ce constructeur initialise une adresse IP de type APIPA (169.254.x.x avec comme masque 255.255.0.0).
 	 */
 	public IP() {
-		this.ipAdr = new int[]{0x00,0x00,0x00,0x00};
-		this.masque = 0;
+		
+		this.ipAdr = new int[] {169,254,1,1};
+		
+		for (int i = 2; i <= 3 ; i++){
+	        this.ipAdr[i]= (int)(Math.random()*255);
+	    }
+		this.masque = 16;
+		
 	}
-	
 	
 	/**
 	 * Ce constructeur initialise une adresse IP avec les paramètres addr et masque.
@@ -57,7 +62,8 @@ public class IP{
 		return Arrays.toString(ipAdr)
 				.replace(",", ".")
 				.replace("[", "")
-				.replace("]", "");
+				.replace("]", "")
+				.replace(" ", "");
 	}
 
 
@@ -89,7 +95,8 @@ public class IP{
 		return Arrays.toString(m)
 				.replace(",", ".")
 				.replace("[", "")
-				.replace("]", "");
+				.replace("]", "")
+				.replace(" ", "");
 	}
 
 
@@ -107,12 +114,27 @@ public class IP{
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "Voici les information concernant votre IP\n" 
-				+ "IP:" + getIpAdr() + "\n" 
-				+ "Masque" + getMasque();
+		return "Voici les informations concernant votre IP\n" 
+				+ "IP: " + getIpAdr() + "\n" 
+				+ "Masque : " + getMasque() + "\n"
+				+ "Passerelle :" + "\n"
+				+ "DNS : ";
 	}
 	
-	
+	public static void main(String[] args) {
+		IP adresse1 = new IP("192.168.1.2", 24);
+		System.out.println(adresse1.toString());
+		IP adresse2 = new IP("192.168.1.254", 16);
+		System.out.println(adresse2.toString());
+		IP adresse3 = new IP("192.168.1.2", 7);
+		System.out.println(adresse3.toString());
+		IP apipa1 = new IP();
+		System.out.println(apipa1.toString());
+		IP apipa2 = new IP();
+		System.out.println(apipa2.toString());
+		IP apipa3 = new IP();
+		System.out.println(apipa3.toString());
+	}
 	
 	
 }
