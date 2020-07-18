@@ -67,7 +67,7 @@ public class DHCP extends IP {
 	 * @param addr : l'adresse IP reçue en paramètre sous forme de String.
 	 * @return l'adresse IP sous forme de tableau de int.
 	 */
-	public int[] string2Interger(String addr) {
+	public int[] string2Integer(String addr) {
 		String[] ipArray;
 		ipArray = addr.split("\\.");
 		return new int[] {
