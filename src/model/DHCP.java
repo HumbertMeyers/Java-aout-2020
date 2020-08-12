@@ -56,11 +56,26 @@ public class DHCP extends IP {
 	 * @param masque : Le masque de sous réseau
 	 * @param dns : L'adresse IP du DNS
 	 */
+	public DHCP(String router, String dhcp, int masque) {
+		super(dhcp, masque);
+		this.ipRouter = string2Integer(router);
+		this.ipDNS = string2Integer(router);
+	}
+	
+	/**
+	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns. 
+	 * Si le routeur ou le dns n'est pas donné, il assigne la valeur donnée à l'adresse IP 
+	 * @param router : L'adresse IP du routeur
+	 * @param dhcp : L'adresse IP du DHCP
+	 * @param masque : Le masque de sous réseau
+	 * @param dns : L'adresse IP du DNS
+	 */
 	public DHCP(String router, String dhcp, int masque, String dns) {
 		super(dhcp, masque);
-		if(router=="") {this.ipRouter = string2Integer(dhcp);} else {this.ipRouter = string2Integer(router);}
-		if(dns=="") {this.ipDNS = string2Integer(dhcp);} else {this.ipDNS = string2Integer(dns);}
+		this.ipRouter = string2Integer(router);
+		this.ipDNS = string2Integer(dns);
 	}
+	
 	
 	/**
 	 * Cette methode transforme une adresse IP à partir d'un String vers un tableau de int.
@@ -143,25 +158,25 @@ public class DHCP extends IP {
 	
 	@Override
 	public String toString() {
-		return "Voici les informations concernant votre DHCP\n" 
-				+ "IP: " + getIpAdr() + "\n" 
-				+ "Masque : " + getMasque() + "\n"
-				+ "Router : " + getIpRouter() + "\n"
-				+ "DNS : " + getIpDNS();
+		return "Configuration IP\n\n" 
+				+ "Adresse IPv4............: " + getIpAdr() + "\n" 
+				+ "Masque de sous-réseau...: " + getMasque() + "\n"
+				+ "Passerelle par défaut...: " + getIpRouter() + "\n"
+				+ "Serveur DNS.............: " + getIpDNS();
 	}
 
 	public static void main(String[] args) {
 		DHCP dhcp1 = new DHCP();
-		DHCP dhcp2 = new DHCP("", "172.16.2.253",23,"172.16.2.1");
-		DHCP dhcp3 = new DHCP("192.168.1.1","192.168.1.2",24,"");
+		DHCP dhcp2 = new DHCP("172.16.2.1", "172.16.2.253",23,"172.16.2.1");
+		DHCP dhcp3 = new DHCP("192.168.1.1","192.168.1.2",24);
 		DHCP dhcp4 = new DHCP("10.8.1.254","10.8.2.127",25,"8.8.8.8");
-		DHCP dhcp5 = new DHCP("","172.16.255.253",16,"172.168.2.1");
+		DHCP dhcp5 = new DHCP("172.16.255.254","172.16.255.253",16,"172.168.2.1");
 		DHCP dhcp6 = new DHCP("192.168.99.1", 24);
-		System.out.println(dhcp1.toString());
-		System.out.println(dhcp2.toString());
-		System.out.println(dhcp3.toString());
-		System.out.println(dhcp4.toString());
-		System.out.println(dhcp5.toString());
+		System.out.println(dhcp1.toString()+ "\n" );
+		System.out.println(dhcp2.toString()+ "\n" );
+		System.out.println(dhcp3.toString()+ "\n" );
+		System.out.println(dhcp4.toString()+ "\n" );
+		System.out.println(dhcp5.toString()+ "\n" );
 		System.out.println(dhcp6.toString());
 		
 	}
