@@ -3,6 +3,8 @@
  */
 package controller;
 
+import java.awt.EventQueue;
+
 import model.ModelDHCP;
 import view.*;
 
@@ -20,7 +22,22 @@ public class DhcpController {
 	 * 
 	 */
 	public DhcpController() {
-		// TODO Auto-generated constructor stub
+		this.model = new ModelDHCP();
+		this.sv = new ServerView();
+		this.cv = new ClientView();
 	}
 
+	
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				new DhcpController();	
+			}
+			
+		});
+	}
 }
