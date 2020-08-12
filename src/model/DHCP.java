@@ -10,7 +10,8 @@ import java.util.List;
  * @author Humbert Meyers
  *
  */
-public class DHCP extends IP {
+
+public class DHCP extends IP{
 	
 	/**
 	 * ipRouter : Une adresse IP (celle du routeur) sous forme de tableau de bytes.
