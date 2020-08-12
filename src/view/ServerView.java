@@ -19,6 +19,16 @@ public class ServerView implements Observer{
 	public ServerView() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void addObserver(Observer obs) {
+	
+	}
+	public void removeObserver() {
+	
+	}
+	public void notifyObserver(String str) {
+	
+	}
 
 	/**
 	 * @param args
