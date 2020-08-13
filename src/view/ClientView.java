@@ -5,10 +5,11 @@ package view;
 
 import java.util.Observer;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import controller.DhcpController;
 import model.ModelDHCP;
-
+import view.ReadInput;
 /**
  * @author Humbert Meyers
  *

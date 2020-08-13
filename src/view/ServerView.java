@@ -3,11 +3,15 @@
  */
 package view;
 
+import java.util.InputMismatchException;
+import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import controller.DhcpController;
 import model.ModelDHCP;
+import view.ReadInput;
 
 /**
  * @author Humbert Meyers
@@ -15,33 +19,10 @@ import model.ModelDHCP;
  */
 @SuppressWarnings("deprecation")
 public class ServerView implements Observer{
-	
-	private Scanner scan;
 
+	Scanner scan;
 	protected ModelDHCP model;
 	protected DhcpController controller;
-	
-	private static final String menuP = ""
-			+ "1. Config DHCP\n"
-			+ "2. Config Client\n"
-			+ "3. Quitter";
-
-	private static final String menuDHCP = ""
-			+ "1.1. Config DHCP\n"
-			+ "1.2. Retour";
-
-	private static final String menuClient = ""
-			+ "2.1. Choix Du client\n"
-			+ "2.2. Retour\n";
-
-	private static final String menuChoixClient = ""
-			+ "2.1.1. Client 1\n"
-			+ "2.1.2. Client 2\n"
-			+ "2.1.3. Retour";
-
-	private static final String menuDORA = ""
-			+ "Procédure DORA\n"
-			+ "Retour\n";
 	
 	/**
 	 * 
@@ -51,6 +32,9 @@ public class ServerView implements Observer{
 		this.controller = controller;
 		this.update(null, null);
 		this.scan = new Scanner(System.in);
+		
+		
+		new Thread(new ReadInput()).start();
 		
 		/* TODO Menu disposant de :
 		 * 			1. Config DHCP
@@ -84,13 +68,13 @@ public class ServerView implements Observer{
 
 	}
 
+
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg == null) {
-			printWelcome();
-			printInstructions();
+		if (arg == null) {		
+			printMenuP();
 		} else {
-			
+			System.out.println("plop");
 		}
 		
 	}
