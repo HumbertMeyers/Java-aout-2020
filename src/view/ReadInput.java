@@ -51,7 +51,7 @@ class ReadInput implements Runnable {
 			+ "1. Procédure DORA\n"
 			+ "2. Retour\n";
 	
-	private volatile boolean endProgram = false;
+	private boolean stopRead = false;
 	
 	private void printMenuP() {
 		
@@ -66,12 +66,12 @@ class ReadInput implements Runnable {
 	}
 	
 	/**
-	 * Asks to the users to confirm his input
-	 * @param confirmMsg : ask confirmation message.
+	 * demande à l'utilisateur de confirmer son choix
+	 * @param msg : message de confirmation
 	 * @return boolean
 	 */
-	private boolean confirm(String confirmMsg) {
-		this.show(confirmMsg + " [O/N]");
+	private boolean confirmer(String msg) {
+		this.show(msg + " [O/N]");
 		while (true) {
 			switch(scan.next().toUpperCase()) {
 			case "O":
@@ -91,7 +91,7 @@ class ReadInput implements Runnable {
 	 */
 	public void run() {
 		
-		while(!endProgram) {
+		while(!stopRead) {
 			
 			String ipRouter = "";
 			int masque = 33;
@@ -122,12 +122,18 @@ class ReadInput implements Runnable {
 						inMenuClient = true;
 						break;
 					case 3: System.exit(0);
-					default: System.out.println("Mauvaise entrée."); scan.nextInt();
+					default: System.out.println("Mauvaise entrée.");
 				}
 			}
 			while(inMenuDHCP) {
 				switch(scan.nextInt()) {
 					case 1:
+						try {
+							wait(1);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						inMenuDHCP = false;
 						break;
 					case 2: 
@@ -135,7 +141,7 @@ class ReadInput implements Runnable {
 						inMenuP = true;
 						inMenuDHCP = false;
 						break;
-					default: System.out.println("Mauvaise entrée."); scan.nextInt();
+					default: System.out.println("Mauvaise entrée.");
 				}
 			}
 			
@@ -151,7 +157,7 @@ class ReadInput implements Runnable {
 						inMenuP = true;
 						inMenuClient = false;
 						break;
-					default: System.out.println("Mauvaise entrée."); scan.nextInt();
+					default: System.out.println("Mauvaise entrée.");
 				}
 			}
 			while(inMenuChoixClient) {
@@ -170,8 +176,9 @@ class ReadInput implements Runnable {
 						show(MENUCLIENT_STRING);
 						inMenuClient = true;
 						inMenuChoixClient = false;
+						client = 0;
 						break;
-					default: System.out.println("Mauvaise entrée."); scan.nextInt();
+					default: System.out.println("Mauvaise entrée.");
 				}
 			}
 			while(inMenuDORA) {
@@ -190,7 +197,7 @@ class ReadInput implements Runnable {
 						inMenuChoixClient = true;
 						inMenuDORA = false;
 						break;
-					default: System.out.println("Mauvaise entrée."); scan.nextInt();
+					default: System.out.println("Mauvaise entrée.");
 				}
 			}
 			
@@ -199,11 +206,11 @@ class ReadInput implements Runnable {
 				try {
 					ipRouter = scan.nextLine();
 					if (validate(ipRouter)) {
-						if(isIpRouterOk = confirm("Confirmez-vous l'adresse IP suivante pour le routeur ? : " + ipRouter)) {
+						if(isIpRouterOk = confirmer("Confirmez-vous l'adresse IP suivante pour le routeur ? : " + ipRouter)) {
 							show("Adresse IP du routeur confirmée !\n");
 						} 
 					} else {
-						show("Le nombre d'hôtes doit être suppérieur à 0 !\n");
+						show("Veuillez entrer une Adresse IP correcte !\n");
 					}
 				} catch (InputMismatchException e) {
 					show("Veuillez entrer une Adresse IP correcte !\n");
@@ -216,7 +223,7 @@ class ReadInput implements Runnable {
 				try {
 					masque = scan.nextInt();
 					if (masque >=0 && masque < 33) {
-						if(isMasqueOk = confirm("Confirmez-vous l'adresse IP suivante pour le routeur ? : " + masque)) {
+						if(isMasqueOk = confirmer("Confirmez-vous le masque de sous réseau suivant ? : " + masque)) {
 							show("Adresse IP du routeur confirmée !\n");
 						} 
 					} else {
@@ -229,11 +236,11 @@ class ReadInput implements Runnable {
 				
 			}
 			while (!isIpDNSOk) {
-				show("Veillez entrez l'adresse IP du routeur sous forme \"xxx.xxx.xxx.xxx\" ");
+				show("Veillez entrez l'adresse IP du DNS sous forme \"xxx.xxx.xxx.xxx\" ");
 				try {
 					ipDNS = scan.nextLine();
 					if (validate(ipDNS)) {
-						if(isIpDNSOk = confirm("Confirmez-vous l'adresse IP suivante pour le DNS ? : " + ipDNS)) {
+						if(isIpDNSOk = confirmer("Confirmez-vous l'adresse IP suivante pour le DNS ? : " + ipDNS)) {
 							show("Adresse IP du routeur confirmée !\n");
 						} 
 					} else {
@@ -245,7 +252,7 @@ class ReadInput implements Runnable {
 				}
 				
 			}
-			endProgram = true;
+			stopRead = true;
 		}
 	}		
 }

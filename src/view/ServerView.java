@@ -34,6 +34,8 @@ public class ServerView implements Observer{
 		this.scan = new Scanner(System.in);
 		
 		
+		this.model.addObserver(this);
+		
 		new Thread(new ReadInput()).start();
 		
 		/* TODO Menu disposant de :
@@ -71,8 +73,7 @@ public class ServerView implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg == null) {		
-			printMenuP();
+		if (arg == null) {
 		} else {
 			System.out.println("plop");
 		}
