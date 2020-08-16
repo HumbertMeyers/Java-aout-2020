@@ -26,7 +26,7 @@ public class DHCP extends IP{
 	/**
 	 * usedIP : La liste des adresses IP deja utilisees
 	 */
-	protected List<IP> usedIP;
+	protected List<String> usedIP;
 	
 	/**
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns.
@@ -133,15 +133,15 @@ public class DHCP extends IP{
 	/**
 	 * @return the usedIP
 	 */
-	public List<IP> getUsedIP() {
+	public List<String> getUsedIP() {
 		return usedIP;
 	}
 
 	/**
 	 * @param usedIP the usedIP to set
 	 */
-	public void setUsedIP(List<IP> usedIP) {
-		this.usedIP = usedIP;
+	public void setUsedIP(String ip) {
+		this.usedIP.add(ip);
 	}
 
 	/**

@@ -15,6 +15,12 @@ class ReadInput implements Runnable {
 	Scanner scan;
 	int client = 0;
 	
+	
+	
+	public ReadInput() {
+		this.scan = new Scanner(System.in);
+	}
+	
 	public static boolean validate(final String ip) {
 	 	String PATTERN = 
 	 			"^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";

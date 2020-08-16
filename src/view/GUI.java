@@ -23,6 +23,8 @@ import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -47,8 +49,6 @@ public class GUI {
 	
 	private JButton newIpBoutton_1;
 	private JButton newIpBoutton_2;
-	private JButton renewIpBoutton_1;
-	private JButton renewIpBoutton_2;
 	private JPanel log_1;
 	private JPanel log_2;
 	private JTextArea textArea_1;
@@ -57,10 +57,13 @@ public class GUI {
 	private JButton Accepter_2;
 	private JButton retourBoutton;
 	
+	JOptionPane popUpIP;
+	private JButton vue_DHCP;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -71,31 +74,62 @@ public class GUI {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
 	 */
 	public GUI() {
+		/*EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					this.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});*/
+		frame = new JFrame();
+		this.frame.setVisible(true);
 		initialize();
+	}
+	
+	public void show(String MsgCréationIp) {
+		popUpIP.showMessageDialog(null, MsgCréationIp, "Retour création IP", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		//frame = new JFrame();
 		frame.setBounds(100, 100, 845, 792);
 		//frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		popUpIP = new JOptionPane();
+		
 		
 		Menu = new JPanel();
 		Menu.setBounds(0, 0, 829, 753);
 		frame.getContentPane().add(Menu);
 		Menu.setLayout(null);
 		
-		vue_Clients = new JButton("Voir les clients");
+		vue_DHCP = new JButton("Config DHCP");
+		vue_DHCP.setBounds(322, 282, 163, 23);
+		Menu.add(vue_DHCP);
+		
+		vue_DHCP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*Client_1.setVisible(true);
+				Client_2.setVisible(true);
+				Menu.setVisible(false);
+				retourBoutton.setVisible(true);*/
+			}
+		});
+		
+		vue_Clients = new JButton("Config Client");
 		vue_Clients.setBounds(322, 316, 163, 23);
 		Menu.add(vue_Clients);
 		
@@ -139,12 +173,8 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		newIpBoutton_1.setBounds(10, 296, 129, 23);
+		newIpBoutton_1.setBounds(10, 296, 279, 23);
 		Client_1.add(newIpBoutton_1);
-		
-		renewIpBoutton_1 = new JButton("Renouveller IP");
-		renewIpBoutton_1.setBounds(149, 296, 129, 23);
-		Client_1.add(renewIpBoutton_1);
 		
 		log_1 = new JPanel();
 		log_1.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -176,12 +206,8 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		newIpBoutton_2.setBounds(10, 296, 129, 23);
+		newIpBoutton_2.setBounds(10, 296, 279, 23);
 		Client_2.add(newIpBoutton_2);
-		
-		renewIpBoutton_2 = new JButton("Renouveller IP");
-		renewIpBoutton_2.setBounds(149, 296, 129, 23);
-		Client_2.add(renewIpBoutton_2);
 		
 		log_2 = new JPanel();
 		log_2.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));

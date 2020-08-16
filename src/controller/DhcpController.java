@@ -16,11 +16,11 @@ import view.*;
 public class DhcpController {
 	
 	ModelDHCP model;
-	ServerView sv;
-	ClientView cv;
-	List<String> ipUtilisees;
+	ServerView cli;
+	//ClientView cv;
+	GUI gui;
 	
-
+	
 	/**
 	 * 
 	 */
@@ -29,26 +29,22 @@ public class DhcpController {
 	}
 
 	public void donneIP(String router, String ip, int masque, String dns) {
+		int resultIP = model.donneIP(router, ip, masque, dns);
+		switch(resultIP) {
+			case 0: 
+				cli.show("Configuration IP effectuée.");
+				gui.show("Configuration IP effectuée.");
+			case 1:	
+				cli.show("Adresse IP déja existante.");
+				gui.show("Adresse IP déja existante.");
+			case 2:	
+				cli.show("Erreur dans la configuration IP.");
+				gui.show("Erreur dans la configuration IP.");
+			default: ;
+		}
 		
-		model.donneIP(router, ip, masque, dns);
-		sv.show("Envoi de la configuration IP effectuée.");
-		
-		if(!ipUtilisees.contains(router)) {setIpUtilisee(router);}
-		if(!ipUtilisees.contains(dns)) {setIpUtilisee(dns);}
-		setIpUtilisee(ip);
 		
 	}
-	
-	void setIpUtilisee(String str){
-		this.ipUtilisees.add(str);
-	}
-	
-	public boolean isIpUtilisee(String ip){
-		return (ipUtilisees.contains(ip)) ? true : false;
-	}
-	
-	
-	
 	
 	public static void main(String[] args) {
 		
@@ -57,7 +53,11 @@ public class DhcpController {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				new DhcpController();	
+				ModelDHCP model = new ModelDHCP();
+				DhcpController DC = new DhcpController(model);
+				ServerView cli = new ServerView(model, DC);
+				GUI gui = new GUI();			
+				
 			}
 			
 		});

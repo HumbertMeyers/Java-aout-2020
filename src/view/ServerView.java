@@ -12,7 +12,7 @@ import model.ModelDHCP;
 import view.ReadInput;
 
 /**
- * @author Humbert Meyers
+ * @author Humbert Meyers 
  *
  */
 @SuppressWarnings("deprecation")
@@ -29,7 +29,7 @@ public class ServerView implements Observer{
 		this.model = model;
 		this.controller = controller;
 		this.update(null, null);
-		this.scan = new Scanner(System.in);
+		//this.scan = new Scanner(System.in);
 		
 		
 		this.model.addObserver(this);
