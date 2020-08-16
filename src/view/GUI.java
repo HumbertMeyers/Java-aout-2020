@@ -6,10 +6,6 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
-import javax.swing.JLayeredPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import java.awt.Panel;
@@ -32,6 +28,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 /**
  * @author Humbert Meyers
@@ -40,6 +37,26 @@ import java.awt.event.MouseEvent;
 public class GUI {
 
 	private JFrame frame;
+	private JTextField Infos_Client2;
+	private JTextField Infos_Client1;
+	private JPanel Client_1;
+	private JPanel Client_2;
+	private JPanel Menu;
+	private JButton vue_Clients;
+	private JButton exitButton;
+	
+	private JButton newIpBoutton_1;
+	private JButton newIpBoutton_2;
+	private JButton renewIpBoutton_1;
+	private JButton renewIpBoutton_2;
+	private JPanel log_1;
+	private JPanel log_2;
+	private JTextArea textArea_1;
+	private JTextArea textArea_2;
+	private JButton Accepter_1;
+	private JButton Accepter_2;
+	private JButton retourBoutton;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -73,28 +90,43 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel Menu = new JPanel();
+		Menu = new JPanel();
 		Menu.setBounds(0, 0, 829, 753);
 		frame.getContentPane().add(Menu);
 		Menu.setLayout(null);
 		
-		JButton Vue_Clients = new JButton("Voir les clients");
-		Vue_Clients.setBounds(322, 316, 163, 23);
-		Menu.add(Vue_Clients);
+		vue_Clients = new JButton("Voir les clients");
+		vue_Clients.setBounds(322, 316, 163, 23);
+		Menu.add(vue_Clients);
 		
-		JButton ExitButton = new JButton("Quitter");
-		ExitButton.setBounds(322, 351, 163, 23);
-		Menu.add(ExitButton);
+		exitButton = new JButton("Quitter");
+		exitButton.setBounds(322, 351, 163, 23);
+		Menu.add(exitButton);
+		
+		vue_Clients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Client_1.setVisible(true);
+				Client_2.setVisible(true);
+				Menu.setVisible(false);
+				retourBoutton.setVisible(true);
+			}
+		});
+		
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		
-		JPanel Client_1 = new JPanel();
+		Client_1 = new JPanel();
 		Client_1.setBackground(Color.WHITE);
 		Client_1.setBounds(10, 10, 809, 330);
 		frame.getContentPane().add(Client_1);
 		Client_1.setLayout(null);
 		Client_1.setVisible(false);
 		
-		JPanel Client_2 = new JPanel();
+		Client_2 = new JPanel();
 		Client_2.setBackground(Color.WHITE);
 		Client_2.setBounds(10, 350, 809, 330);
 		frame.getContentPane().add(Client_2);
@@ -102,7 +134,7 @@ public class GUI {
 		Client_2.setVisible(false);
 		
 		
-		JButton newIpBoutton_1 = new JButton("Nouvelle Adresse IP");
+		newIpBoutton_1 = new JButton("Nouvelle Adresse IP");
 		newIpBoutton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -110,23 +142,36 @@ public class GUI {
 		newIpBoutton_1.setBounds(10, 296, 129, 23);
 		Client_1.add(newIpBoutton_1);
 		
-		JButton renewIpBoutton_1 = new JButton("Renouveller IP");
+		renewIpBoutton_1 = new JButton("Renouveller IP");
 		renewIpBoutton_1.setBounds(149, 296, 129, 23);
 		Client_1.add(renewIpBoutton_1);
 		
-		JPanel log_1 = new JPanel();
+		log_1 = new JPanel();
 		log_1.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		log_1.setBounds(10, 11, 279, 274);
 		Client_1.add(log_1);
 		log_1.setLayout(null);
 		
-		JTextArea textArea_1 = new JTextArea();
+		textArea_1 = new JTextArea();
 		textArea_1.setEditable(false);
 		textArea_1.setBounds(10, 22, 259, 241);
 		log_1.add(textArea_1);
 		
+		Infos_Client1 = new JTextField();
+		Infos_Client1.setEditable(false);
+		Infos_Client1.setBounds(328, 11, 471, 274);
+		Client_1.add(Infos_Client1);
+		Infos_Client1.setColumns(10);
 		
-		JButton newIpBoutton_2 = new JButton("Nouvelle Adresse IP");
+		Accepter_1 = new JButton("Accepter");
+		Accepter_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Accepter_1.setBounds(710, 296, 89, 23);
+		Client_1.add(Accepter_1);
+		
+		newIpBoutton_2 = new JButton("Nouvelle Adresse IP");
 		newIpBoutton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -134,49 +179,48 @@ public class GUI {
 		newIpBoutton_2.setBounds(10, 296, 129, 23);
 		Client_2.add(newIpBoutton_2);
 		
-		JButton renewIpBoutton_2 = new JButton("Renouveller IP");
+		renewIpBoutton_2 = new JButton("Renouveller IP");
 		renewIpBoutton_2.setBounds(149, 296, 129, 23);
 		Client_2.add(renewIpBoutton_2);
 		
-		JPanel log_2 = new JPanel();
+		log_2 = new JPanel();
 		log_2.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		log_2.setBounds(10, 11, 279, 274);
 		Client_2.add(log_2);
 		log_2.setLayout(null);
 		
-		JTextArea textArea_2 = new JTextArea();
+		textArea_2 = new JTextArea();
 		textArea_2.setEditable(false);
 		textArea_2.setBounds(10, 22, 259, 241);
 		log_2.add(textArea_2);
 		
-		JButton exitBoutton = new JButton("Retour Menu");
-		exitBoutton.addActionListener(new ActionListener() {
+		Infos_Client2 = new JTextField();
+		Infos_Client2.setEditable(false);
+		Infos_Client2.setBounds(328, 11, 471, 274);
+		Client_2.add(Infos_Client2);
+		Infos_Client2.setColumns(10);
+		
+		Accepter_2 = new JButton("Accepter");
+		Accepter_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Accepter_2.setBounds(710, 296, 89, 23);
+		Client_2.add(Accepter_2);
+		
+		
+		retourBoutton = new JButton("Retour Menu");
+		retourBoutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Client_1.setVisible(false);
 				Client_2.setVisible(false);
 				Menu.setVisible(true);
-				exitBoutton.setVisible(false);
+				retourBoutton.setVisible(false);
 			}
 		});
-		exitBoutton.setBounds(688, 719, 131, 23);
-		frame.getContentPane().add(exitBoutton);
-		exitBoutton.setVisible(false);
-		
-		Vue_Clients.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Client_1.setVisible(true);
-				Client_2.setVisible(true);
-				Menu.setVisible(false);
-				exitBoutton.setVisible(true);
-			}
-		});
-		
-		ExitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+		retourBoutton.setBounds(688, 719, 131, 23);
+		frame.getContentPane().add(retourBoutton);
+		retourBoutton.setVisible(false);
 		
 	}
-	
 }

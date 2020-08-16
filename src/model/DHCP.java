@@ -43,10 +43,10 @@ public class DHCP extends IP{
 	 * @param dhcp : L'adresse IP du DHCP
 	 * @param masque : Le masque de sous réseau
 	 */
-	public DHCP(String dhcp, int masque) {
-		super(dhcp, masque);
-		this.ipRouter = string2Integer(dhcp);
-		this.ipDNS = string2Integer(dhcp);
+	public DHCP(String ip, int masque) {
+		super(ip, masque);
+		this.ipRouter = string2Integer(ip);
+		this.ipDNS = string2Integer(ip);
 	}
 
 	/**
@@ -57,8 +57,8 @@ public class DHCP extends IP{
 	 * @param masque : Le masque de sous réseau
 	 * @param dns : L'adresse IP du DNS
 	 */
-	public DHCP(String router, String dhcp, int masque) {
-		super(dhcp, masque);
+	public DHCP(String router, String ip, int masque) {
+		super(ip, masque);
 		this.ipRouter = string2Integer(router);
 		this.ipDNS = string2Integer(router);
 	}
@@ -71,8 +71,8 @@ public class DHCP extends IP{
 	 * @param masque : Le masque de sous réseau
 	 * @param dns : L'adresse IP du DNS
 	 */
-	public DHCP(String router, String dhcp, int masque, String dns) {
-		super(dhcp, masque);
+	public DHCP(String router, String ip, int masque, String dns) {
+		super(ip, masque);
 		this.ipRouter = string2Integer(router);
 		this.ipDNS = string2Integer(dns);
 	}

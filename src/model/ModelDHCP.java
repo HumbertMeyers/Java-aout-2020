@@ -3,6 +3,7 @@
  */
 package model;
 
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -18,6 +19,14 @@ public class ModelDHCP extends Observable {
 	 */
 	public ModelDHCP() {
 		this.dhcp = new DHCP();
+	}
+	
+	public void donneIP(String router, String ip, int masque, String dns) {
+		dhcp = new DHCP(router, ip, masque, dns);
+	}
+	
+	public List<IP> getUsedIP() {
+		return dhcp.usedIP;
 	}
 
 	/**

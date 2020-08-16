@@ -3,11 +3,9 @@
  */
 package view;
 
-import java.util.InputMismatchException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import controller.DhcpController;
 import model.ModelDHCP;
@@ -51,6 +49,9 @@ public class ServerView implements Observer{
 		*/
 	}
 	
+	public void show(String string) {
+		System.out.println(string);
+	}
 	
 	public void addObserver(Observer obs) {
 	
