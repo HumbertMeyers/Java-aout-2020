@@ -38,6 +38,7 @@ public class ModelDHCP extends Observable {
 			}
 		}
 	}
+
 	
 	public List<String> getUsedIP() {
 		return dhcp.usedIP;
@@ -46,13 +47,4 @@ public class ModelDHCP extends Observable {
 	public boolean isIpUtilisee(String ip){
 		return (dhcp.usedIP.contains(ip)) ? true : false;
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

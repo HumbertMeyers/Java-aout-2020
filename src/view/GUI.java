@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
+
+import controller.DhcpController;
+import model.ModelDHCP;
+
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -123,14 +127,7 @@ public class GUI implements ActionListener, Observer {
 		vue_DHCP.setBounds(322, 282, 163, 23);
 		Menu.add(vue_DHCP);
 		
-		vue_DHCP.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/*Client_1.setVisible(true);
-				Client_2.setVisible(true);
-				Menu.setVisible(false);
-				retourBoutton.setVisible(true);*/
-			}
-		});
+		vue_DHCP.addActionListener(this);
 		
 		vue_Clients = new JButton("Config Client");
 		vue_Clients.setBounds(322, 316, 163, 23);
@@ -142,11 +139,7 @@ public class GUI implements ActionListener, Observer {
 		
 		vue_Clients.addActionListener(this);
 		
-		exitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+		exitButton.addActionListener(this);
 		
 		
 		Client_1 = new JPanel();
@@ -165,10 +158,7 @@ public class GUI implements ActionListener, Observer {
 		
 		
 		newIpBoutton_1 = new JButton("Nouvelle Adresse IP");
-		newIpBoutton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		newIpBoutton_1.addActionListener(this);
 		newIpBoutton_1.setBounds(10, 296, 279, 23);
 		Client_1.add(newIpBoutton_1);
 		
@@ -190,18 +180,12 @@ public class GUI implements ActionListener, Observer {
 		Infos_Client1.setColumns(10);
 		
 		Accepter_1 = new JButton("Accepter");
-		Accepter_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		Accepter_1.addActionListener(this);
 		Accepter_1.setBounds(710, 296, 89, 23);
 		Client_1.add(Accepter_1);
 		
 		newIpBoutton_2 = new JButton("Nouvelle Adresse IP");
-		newIpBoutton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		newIpBoutton_2.addActionListener(this);
 		newIpBoutton_2.setBounds(10, 296, 279, 23);
 		Client_2.add(newIpBoutton_2);
 		
@@ -223,10 +207,7 @@ public class GUI implements ActionListener, Observer {
 		Infos_Client2.setColumns(10);
 		
 		Accepter_2 = new JButton("Accepter");
-		Accepter_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		Accepter_2.addActionListener(this);
 		Accepter_2.setBounds(710, 296, 89, 23);
 		Client_2.add(Accepter_2);
 		
@@ -242,15 +223,19 @@ public class GUI implements ActionListener, Observer {
 	public void actionPerformed(ActionEvent e) {
 		Object  source = e.getSource();
 	    if  (source == vue_DHCP){
-	    	
+	    	DhcpController.changerVue("vueDHCP");
+	    }
+	    else if (source == retourBoutton) {
 	    }
 	    else if (source == vue_Clients) {
 	    	Client_1.setVisible(true);
 			Client_2.setVisible(true);
 			Menu.setVisible(false);
 			retourBoutton.setVisible(true);
+			DhcpController.changerVue("vueClient");
 	    }
 	    else if (source == exitButton) {
+	    	System.exit(0);
 	    }
 	    else if (source == retourBoutton) {
 	    	Client_1.setVisible(false);
@@ -258,7 +243,9 @@ public class GUI implements ActionListener, Observer {
 			Menu.setVisible(true);
 			retourBoutton.setVisible(false);
 	    }
-	    else if (source == vue_Clients) {
+	    else if (source == newIpBoutton_1) {
+	    	int result = DhcpController.model.donneIP("192.168.1.1", "192.168.1.2", 24, "1.1.1.1");
+	    	System.out.println(result);
 	    }
 	    else if (source == vue_Clients) {
 	    }
@@ -269,9 +256,21 @@ public class GUI implements ActionListener, Observer {
 	    else {}
 	}
 
+	public void addObserver(Observer obs) {
+		
+	}
+	public void removeObserver() {
+		
+	}
+	public void notifyObserver(String str) {
+		
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		frame.pack();
+		if (o instanceof ModelDHCP && "newIpBoutton_1".equals(arg)) {
+			show("Yeh !!");
+        }
 	}
 }

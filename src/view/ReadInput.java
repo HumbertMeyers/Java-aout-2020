@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author Humbert Meyers
  * Main running Class
  */
-class ReadInput implements Runnable {
+public class ReadInput implements Runnable {
 	
 	Scanner scan;
 	int client = 0;
@@ -28,32 +28,32 @@ class ReadInput implements Runnable {
 	}
 	
 	
-	private static final String INSTRUCTIONS_STRING = ""
+	public static final String INSTRUCTIONS_STRING = ""
 			+ "Bienvenue";
 	
-	private static final String MENUP_STRING = ""
+	public static final String MENUP_STRING = ""
 			+ "1. Config DHCP\n"
 			+ "2. Config Client\n"
 			+ "3. Quitter";
 
-	private static final String MENUDHCP_STRING = ""
+	public static final String MENUDHCP_STRING = ""
 			+ "1. Config DHCP\n"
 			+ "2. Retour";
 
-	private static final String MENUCLIENT_STRING = ""
+	public static final String MENUCLIENT_STRING = ""
 			+ "1. Choix Du client\n"
 			+ "2. Retour\n";
 	
-	private static final String VUECLIENT_STRING = ""
+	public static final String VUECLIENT_STRING = ""
 			+ "1. Vue avec les deux clients\n"
 			+ "2. Retour";
 
-	private static final String MENUCHOIXCLIENT_STRING = ""
+	public static final String MENUCHOIXCLIENT_STRING = ""
 			+ "1. Client 1\n"
 			+ "2. Client 2\n"
 			+ "3. Retour";
 
-	private static final String MENUDORA_STRING = ""
+	public static final String MENUDORA_STRING = ""
 			+ "1. Procédure DORA\n"
 			+ "2. Retour\n";
 	
@@ -61,11 +61,11 @@ class ReadInput implements Runnable {
 	
 	private void printMenuP() {
 		
-		this.show(INSTRUCTIONS_STRING);
-		this.show(MENUP_STRING);
+		show(INSTRUCTIONS_STRING);
+		show(MENUP_STRING);
 	}
 
-	public void show(String string) {
+	public static void show(String string) {
 		
 		System.out.println(string);
 		

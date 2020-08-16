@@ -15,10 +15,9 @@ import view.*;
  */
 public class DhcpController {
 	
-	ModelDHCP model;
-	ServerView cli;
-	//ClientView cv;
-	GUI gui;
+	public static ModelDHCP model;
+	protected ServerView cli;
+	protected GUI gui;
 	
 	
 	/**
@@ -60,10 +59,29 @@ public class DhcpController {
 				ModelDHCP model = new ModelDHCP();
 				DhcpController DC = new DhcpController(model);
 				ServerView cli = new ServerView(model, DC);
-				GUI gui = new GUI();			
+				GUI gui = new GUI();	
 				
 			}
 			
 		});
+	}
+
+	/**
+	 * 
+	 */
+	
+	public static void changerVue(String e) {
+		System.out.println("--- \n");
+		switch (e) {
+			case "vueMenu" : 
+				ReadInput.show(ReadInput.MENUP_STRING);
+				break;
+			case "vueClient" :
+				ReadInput.show(ReadInput.MENUCLIENT_STRING);
+				break;
+			case "vueDHCP" :
+				ReadInput.show(ReadInput.MENUDHCP_STRING);
+				break;
+		}
 	}
 }
