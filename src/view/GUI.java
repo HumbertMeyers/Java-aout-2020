@@ -17,6 +17,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
@@ -36,7 +38,8 @@ import javax.swing.JTextField;
  * @author Humbert Meyers
  *
  */
-public class GUI {
+@SuppressWarnings("deprecation")
+public class GUI implements ActionListener, Observer {
 
 	private JFrame frame;
 	private JTextField Infos_Client2;
@@ -137,14 +140,7 @@ public class GUI {
 		exitButton.setBounds(322, 351, 163, 23);
 		Menu.add(exitButton);
 		
-		vue_Clients.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Client_1.setVisible(true);
-				Client_2.setVisible(true);
-				Menu.setVisible(false);
-				retourBoutton.setVisible(true);
-			}
-		});
+		vue_Clients.addActionListener(this);
 		
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -236,17 +232,46 @@ public class GUI {
 		
 		
 		retourBoutton = new JButton("Retour Menu");
-		retourBoutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Client_1.setVisible(false);
-				Client_2.setVisible(false);
-				Menu.setVisible(true);
-				retourBoutton.setVisible(false);
-			}
-		});
+		retourBoutton.addActionListener(this);
 		retourBoutton.setBounds(688, 719, 131, 23);
 		frame.getContentPane().add(retourBoutton);
-		retourBoutton.setVisible(false);
+		retourBoutton.setVisible(false);		
+
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		Object  source = e.getSource();
+	    if  (source == vue_DHCP){
+	    	
+	    }
+	    else if (source == vue_Clients) {
+	    	Client_1.setVisible(true);
+			Client_2.setVisible(true);
+			Menu.setVisible(false);
+			retourBoutton.setVisible(true);
+	    }
+	    else if (source == exitButton) {
+	    }
+	    else if (source == retourBoutton) {
+	    	Client_1.setVisible(false);
+			Client_2.setVisible(false);
+			Menu.setVisible(true);
+			retourBoutton.setVisible(false);
+	    }
+	    else if (source == vue_Clients) {
+	    }
+	    else if (source == vue_Clients) {
+	    }
+	    else if (source == vue_Clients) {
+	    }
+	    else if (source == vue_Clients) {
+	    }
+	    else {}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 		
 	}
 }

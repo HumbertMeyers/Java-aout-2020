@@ -34,13 +34,17 @@ public class DhcpController {
 			case 0: 
 				cli.show("Configuration IP effectuée.");
 				gui.show("Configuration IP effectuée.");
+				break;
 			case 1:	
 				cli.show("Adresse IP déja existante.");
 				gui.show("Adresse IP déja existante.");
+				break;
 			case 2:	
 				cli.show("Erreur dans la configuration IP.");
 				gui.show("Erreur dans la configuration IP.");
-			default: ;
+				break;
+			default: 
+				break;
 		}
 		
 		
