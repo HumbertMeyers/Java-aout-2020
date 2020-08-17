@@ -3,6 +3,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class DHCP extends IP{
 	/**
 	 * usedIP : La liste des adresses IP deja utilisees
 	 */
-	protected List<String> usedIP;
+	protected ArrayList<String> usedIP = new ArrayList<String>();
 	
 	/**
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns.
@@ -35,39 +36,41 @@ public class DHCP extends IP{
 		super("192.168.1.1", 24);
 		this.ipRouter = string2Integer("192.168.1.1");
 		this.ipDNS = string2Integer("192.168.1.1");
+		this.usedIP.add("0.0.0.0");
 	}
 	
 	/**
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns.
 	 * Il assigne la valeur donnée à l'adresse IP aux routeur et au DNS
-	 * @param dhcp : L'adresse IP du DHCP
+	 * @param ip : L'adresse IP du DHCP
 	 * @param masque : Le masque de sous réseau
 	 */
 	public DHCP(String ip, int masque) {
 		super(ip, masque);
 		this.ipRouter = string2Integer(ip);
 		this.ipDNS = string2Integer(ip);
+		this.usedIP.add("0.0.0.0");
 	}
 
 	/**
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns. 
 	 * Si le routeur ou le dns n'est pas donné, il assigne la valeur donnée à l'adresse IP 
 	 * @param router : L'adresse IP du routeur
-	 * @param dhcp : L'adresse IP du DHCP
+	 * @param ip : L'adresse IP du DHCP
 	 * @param masque : Le masque de sous réseau
-	 * @param dns : L'adresse IP du DNS
 	 */
 	public DHCP(String router, String ip, int masque) {
 		super(ip, masque);
 		this.ipRouter = string2Integer(router);
 		this.ipDNS = string2Integer(router);
+		this.usedIP.add("0.0.0.0");
 	}
 	
 	/**
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns. 
 	 * Si le routeur ou le dns n'est pas donné, il assigne la valeur donnée à l'adresse IP 
 	 * @param router : L'adresse IP du routeur
-	 * @param dhcp : L'adresse IP du DHCP
+	 * @param ip : L'adresse IP du DHCP
 	 * @param masque : Le masque de sous réseau
 	 * @param dns : L'adresse IP du DNS
 	 */
@@ -75,6 +78,7 @@ public class DHCP extends IP{
 		super(ip, masque);
 		this.ipRouter = string2Integer(router);
 		this.ipDNS = string2Integer(dns);
+		this.usedIP.add("0.0.0.0");
 	}
 	
 	
@@ -133,7 +137,7 @@ public class DHCP extends IP{
 	/**
 	 * @return the usedIP
 	 */
-	public List<String> getUsedIP() {
+	public ArrayList<String> getUsedIP() {
 		return usedIP;
 	}
 
@@ -155,6 +159,12 @@ public class DHCP extends IP{
 				.replace("[", "")
 				.replace("]", "")
 				.replace(" ", "");
+	}
+	
+	
+	public String getIP() {
+		IP ip = new IP();
+		return ip.toString();
 	}
 	
 	@Override

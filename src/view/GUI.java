@@ -246,11 +246,11 @@ public class GUI implements ActionListener, Observer {
 			retourBoutton.setVisible(false);
 	    }
 	    else if (source == newIpBoutton_1) {
-	    	int result = DhcpController.model.donneIP("192.168.1.1", "192.168.1.2", 24, "1.1.1.1");
+	    	int result = DhcpController.model.doraDemande();
 	    	System.out.println(result);
 	    }
 	    else if (source == newIpBoutton_2) {
-	    	int result = DhcpController.model.donneIP("192.168.1.1", "192.168.1.2", 24, "1.1.1.1");
+	    	int result = DhcpController.model.doraDemande();
 	    	System.out.println(result);
 	    }
 	    else if (source == Accepter_1) {

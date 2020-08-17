@@ -5,12 +5,13 @@ package model;
 
 import java.util.Arrays;
 
+
 /**
  * @author Humbert Meyers
  *
  */
 
-public abstract class IP{
+public class IP{
 
 	/**
 	 * Une adresse IP sous forme de tableau de bytes.
@@ -116,6 +117,31 @@ public abstract class IP{
 				.replace("]", "")
 				.replace(" ", "");
 	}
+	
+	public int getMasqueInt(String masque) {
+		int masqueInt = 0;
+		String byteStr = "";
+		String[] ipArray;
+		ipArray = masque.split("\\.");
+		int[] tab = 
+				new int[] {
+				Integer.parseInt(ipArray[0]),
+				Integer.parseInt(ipArray[1]),
+				Integer.parseInt(ipArray[2]),
+				Integer.parseInt(ipArray[3])
+		}; 
+		for (int i = 0; i <= 3; i++) {
+			byte byt = (byte) tab[i]; //129
+			byteStr += String.format("%8s", Integer.toBinaryString(byt & 0xFF)).replace(' ', '0'); // 10000001
+		}
+		
+		for (int i=0; i < 32; i++) {
+			int j = Character.getNumericValue(byteStr.charAt(i));
+			masqueInt += j;
+		}
+		System.out.println(masqueInt);
+		return masqueInt;
+	}
 
 
 	/**
@@ -137,7 +163,7 @@ public abstract class IP{
 				+ "Masque : " + getMasque();
 	}
 	
-	public abstract int[] string2Integer(String addr);
+	//public abstract int[] string2Integer(String addr);
 	
 	public static void main(String[] args) {
 		/*
