@@ -82,6 +82,20 @@ public class DhcpController {
 			case "vueDHCP" :
 				ReadInput.show(ReadInput.MENUDHCP_STRING);
 				break;
+			/*case "vueDHCP" :
+				ReadInput.show(ReadInput.MENUDHCP_STRING);
+				break;
+			case "vueDHCP" :
+				ReadInput.show(ReadInput.MENUDHCP_STRING);
+				break;
+			case "vueDHCP" :
+				ReadInput.show(ReadInput.MENUDHCP_STRING);
+				break;
+			case "vueDHCP" :
+				ReadInput.show(ReadInput.MENUDHCP_STRING);
+				break;*/
+			default:
+				break;
 		}
 	}
 }

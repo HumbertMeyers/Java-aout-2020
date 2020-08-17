@@ -46,14 +46,16 @@ import javax.swing.JTextField;
 public class GUI implements ActionListener, Observer {
 
 	private JFrame frame;
-	private JTextField Infos_Client2;
-	private JTextField Infos_Client1;
 	private JPanel Client_1;
 	private JPanel Client_2;
 	private JPanel Menu;
+	
+	private JButton vue_DHCP;
 	private JButton vue_Clients;
 	private JButton exitButton;
 	
+	private JTextField Infos_Client1;
+	private JTextField Infos_Client2;
 	private JButton newIpBoutton_1;
 	private JButton newIpBoutton_2;
 	private JPanel log_1;
@@ -65,7 +67,7 @@ public class GUI implements ActionListener, Observer {
 	private JButton retourBoutton;
 	
 	JOptionPane popUpIP;
-	private JButton vue_DHCP;
+	
 	
 	/**
 	 * Launch the application.
@@ -247,13 +249,18 @@ public class GUI implements ActionListener, Observer {
 	    	int result = DhcpController.model.donneIP("192.168.1.1", "192.168.1.2", 24, "1.1.1.1");
 	    	System.out.println(result);
 	    }
-	    else if (source == vue_Clients) {
+	    else if (source == newIpBoutton_2) {
+	    	int result = DhcpController.model.donneIP("192.168.1.1", "192.168.1.2", 24, "1.1.1.1");
+	    	System.out.println(result);
 	    }
-	    else if (source == vue_Clients) {
+	    else if (source == Accepter_1) {
+	    	
 	    }
-	    else if (source == vue_Clients) {
+	    else if (source == Accepter_2) {
 	    }
-	    else {}
+	    else {
+	    	
+	    }
 	}
 
 	public void addObserver(Observer obs) {
