@@ -76,7 +76,7 @@ public class DhcpController {
 	/**
 	 * Cette fonction enregistre la configuration du DHCP
 	 * @param dns l'adresse IP du DNS sous forme de String
-	 * @param router l'adresse IP du DNS sous forme de String
+	 * @param router l'adresse IP du router sous forme de String
 	 * @param masque le masque de sous réseau sous forme de Integer
 	 */
 	public static void enregistrerDhcpConfig(String dns, String router, String masque) {

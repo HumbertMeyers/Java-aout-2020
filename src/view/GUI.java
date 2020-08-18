@@ -172,47 +172,47 @@ public class GUI implements ActionListener, Observer {
 		MenuDHCP.setLayout(null);
 		
 		textField = new JTextField("");
-		textField.setBounds(219, 52, 123, 17);
+		textField.setBounds(321, 199, 123, 23);
 		MenuDHCP.add(textField);
 		textField.setColumns(10);
 		
 		JLabel DNS = new JLabel("DNS");
-		DNS.setBounds(83, 55, 93, 14);
+		DNS.setBounds(185, 202, 93, 14);
 		MenuDHCP.add(DNS);
 		
 		routeur = new JLabel("Routeur");
-		routeur.setBounds(83, 93, 93, 14);
+		routeur.setBounds(185, 247, 93, 14);
 		MenuDHCP.add(routeur);
 		
 		textField_1 = new JTextField("");
 		textField_1.setColumns(10);
-		textField_1.setBounds(219, 90, 123, 17);
+		textField_1.setBounds(321, 244, 123, 23);
 		MenuDHCP.add(textField_1);
 		
 		masque = new JLabel("Masque");
-		masque.setBounds(83, 136, 46, 14);
+		masque.setBounds(185, 290, 46, 14);
 		MenuDHCP.add(masque);
 		
 		textField_2 = new JTextField("");
-		textField_2.setBounds(219, 133, 86, 20);
+		textField_2.setBounds(321, 286, 123, 23);
 		MenuDHCP.add(textField_2);
 		textField_2.setColumns(10);
 		
 		enregistreDHCP = new JButton("Enregistrer");
 		enregistreDHCP.addActionListener(this);
-		enregistreDHCP.setBounds(83, 220, 89, 23);
+		enregistreDHCP.setBounds(338, 365, 89, 23);
 		MenuDHCP.add(enregistreDHCP);
 		
 		lblNewLabel = new JLabel("ex : 192.168.1.1");
-		lblNewLabel.setBounds(381, 54, 46, 14);
+		lblNewLabel.setBounds(483, 201, 110, 14);
 		MenuDHCP.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("ex : 192.168.1.1");
-		lblNewLabel_1.setBounds(381, 93, 46, 14);
+		lblNewLabel_1.setBounds(483, 247, 110, 14);
 		MenuDHCP.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("ex : 24 pour un /24");
-		lblNewLabel_2.setBounds(381, 136, 46, 14);
+		lblNewLabel_2.setBounds(483, 290, 110, 14);
 		MenuDHCP.add(lblNewLabel_2);
 		MenuDHCP.setVisible(false);
 		
