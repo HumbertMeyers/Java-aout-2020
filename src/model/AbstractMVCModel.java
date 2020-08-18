@@ -12,25 +12,19 @@ import java.util.ArrayList;
  */
 public abstract class AbstractMVCModel implements Observable{
 
-	  private ArrayList<Observer> listObserver = new ArrayList<Observer>();
-	  
-	  
-
-	  
-	  //Implémentation du pattern observer
-	  public void addObserver(Observer obs) {
-	    this.listObserver.add(obs);
-	  }
-
-	  public void notifyObserver(String str) {
-	    if(str.matches("^0[0-9]+"))
-	      str = str.substring(1, str.length());
-
-	    for(Observer obs : listObserver)
-	      obs.update(str);
-	  }
-
-	  public void removeObserver() {
-	    listObserver = new ArrayList<Observer>();
-	  }  
+	private ArrayList<Observer> listObserver = new ArrayList<Observer>();
+  
+	//Implémentation du pattern observer
+	public void addObserver(Observer obs) {
+		this.listObserver.add(obs);
 	}
+
+	public void notifyObserver(String str) {
+		for(Observer obs : listObserver)
+			obs.update(str);
+	}
+
+	public void removeObserver() {
+		listObserver = new ArrayList<Observer>();
+	}  
+}

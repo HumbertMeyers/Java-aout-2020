@@ -4,6 +4,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import model.Observable;
 
 /**
@@ -19,10 +21,7 @@ public class ModelDHCP extends AbstractMVCModel {
 	 * router : l'adresse IP du router sous forme de String
 	 * masque : le masque de sous réseau sous forme de Integer
 	 */
-	private DHCP dhcp;
-	public String dns;
-	public String router;
-	public int masque;
+	private static DHCP dhcp;
 	
 
 	/**
@@ -33,14 +32,15 @@ public class ModelDHCP extends AbstractMVCModel {
 	}
 	
 	public void setParamDHCP(String dns, String router, String masque) {
-		this.dns = dns;
-		this.router = router;
+		dhcp.setIpDNS(dhcp.string2Integer(dns));
+		dhcp.setIpRouter(dhcp.string2Integer(router));
 		dhcp.setUsedIP(dns);
 		dhcp.setUsedIP(router);
-		this.masque = Integer.parseInt(masque);
-		notifyObserver(this.dns);
-		notifyObserver(this.router);
-		notifyObserver(masque);
+		dhcp.setMasque(Integer.parseInt(masque));
+		notifyObserver(dhcp.getIpDNS());
+		notifyObserver(dhcp.getIpRouter());
+		notifyObserver(dhcp.getMasque());
+		
 	}
 	
 	
@@ -48,15 +48,17 @@ public class ModelDHCP extends AbstractMVCModel {
 	 * Cette fonction gère la demande d'une adresse IP.
 	 * @return une adresse IP sous forme de string.
 	 */
-	public String doraDemande() {
+	public String doraDemande() {		
 		//dhcp = new DHCP(this.router);
-		dhcp.setIpRouter(dhcp.string2Integer(this.router));
-		dhcp.setIpDNS(dhcp.string2Integer(this.dns));
-		dhcp.setMasque(this.masque);
-		String ip = dhcp.getIpAdr();
-		String newIp = donneIP(this.router, ip, this.masque, this.dns);
+		String router = dhcp.getIpRouter();
+		int masque = dhcp.getMasqueInt(dhcp.getMasque());
+		String dns = dhcp.getIpDNS();
+		String ip = dhcp.getIpAdr(dhcp.IpBaseeSurRouter(dhcp.string2Integer(router)));
+		if(ip.equals("0.0.0.0")) {
+			return "Votre DHCP est rempli";
+		}
+		String newIp = donneIP(router, ip, masque, dns);
 		return newIp;
-		//notify
 	}
 	
 	/**
@@ -69,7 +71,7 @@ public class ModelDHCP extends AbstractMVCModel {
 	 */
 	public String donneIP(String router, String ip, int masque, String dns) {
 		if(isIpUtilisee(ip)) {
-			System.out.println(ip.toString());
+			//System.out.println(ip.toString());
 			return "IP déjà utilisée";
 		}
 		else {
@@ -77,7 +79,8 @@ public class ModelDHCP extends AbstractMVCModel {
 				if(!isIpUtilisee(dns)) {dhcp.setUsedIP(dns);}
 				if(!isIpUtilisee(router)) {dhcp.setUsedIP(router);}
 				dhcp.setUsedIP(ip);
-				System.out.println(ip.toString());
+				//System.out.println(ip.toString());
+				notifyObserver(dhcp.getUsedIP().toString());
 				return concatInfos(dns, router, masque, ip); // DNS, routeur , masque, IP
 			} catch (Exception e) {
 				return "Erreur dans la demande DORA";
@@ -89,7 +92,7 @@ public class ModelDHCP extends AbstractMVCModel {
 	public String concatInfos(String dns, String router, int masque, String ip) {
 		String conca = "DNS : " + dns 
 				+ "\nPasserelle par défaut : " + router
-				+ "\nMasque de sous-réseau : " + masque
+				+ "\nMasque de sous-réseau : " + dhcp.getMasque()
 				+ "\nAdresse IPv4 proposée : " + ip;
 		
 		return conca;
@@ -135,5 +138,13 @@ public class ModelDHCP extends AbstractMVCModel {
 	 */
 	public boolean isIpUtilisee(String ip){
 		return (contain(dhcp.usedIP, ip)) ? true : false;
+	}
+	
+	/**
+	 * Fonction qui supprime tout de l'ArrayList UsedIP
+	 */
+	public void clearUsedIP() {
+		dhcp.clearUsedIP();
+		notifyObserver(dhcp.getUsedIP().toString());
 	}
 }

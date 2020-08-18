@@ -49,10 +49,27 @@ public class DHCP extends IP{
 	}
 	
 	public int[] IpBaseeSurRouter(int[] ipRouter) {
-		ipAdr = ipRouter;
-		while(contain(usedIP, getIpAdr(ipAdr))) {
-			ipAdr[3]++;
-		}
+		int [] ipAdr = ipRouter;
+		int temp = ipAdr[3];
+		boolean flag = true;
+		
+		while(flag) 
+			if(contain(usedIP, getIpAdr(ipAdr))) {
+				ipAdr[3] += 1;
+				//System.out.println(getIpAdr(ipAdr));
+				if(ipAdr[3] == temp) {
+					ipAdr[0] = 0; ipAdr[1] = 0; ipAdr[2]=0; ipAdr[3] = 0;
+					return ipAdr;
+				}
+				if(ipAdr[3] == 255) {
+					ipAdr[3] = 1;
+				}
+				
+			}
+			
+			else {
+				flag = false;
+			}
 		return ipAdr;
 	}
 	
@@ -166,10 +183,17 @@ public class DHCP extends IP{
 	}
 
 	/**
-	 * @param usedIP the usedIP to set
+	 * @param ip : the usedIP to add to the ArrayList
 	 */
 	public void setUsedIP(String ip) {
 		this.usedIP.add(ip);
+	}
+	
+	/**
+	 * Fonction qui supprime tout de l'ArrayList UsedIP
+	 */
+	public void clearUsedIP() {
+		this.usedIP.clear();
 	}
 
 	/**
@@ -184,8 +208,7 @@ public class DHCP extends IP{
 				.replace("]", "")
 				.replace(" ", "");
 	}
-	
-	
+
 	public String getIP() {
 		IP ip = new IP();
 		return ip.toString();
@@ -207,12 +230,12 @@ public class DHCP extends IP{
 		DHCP dhcp4 = new DHCP("10.8.1.254","10.8.2.127",25,"8.8.8.8");
 		DHCP dhcp5 = new DHCP("172.16.255.254","172.16.255.253",16,"172.168.2.1");
 		DHCP dhcp6 = new DHCP("192.168.99.1", 24);
-		System.out.println(dhcp1.toString()+ "\n" );
+		/*System.out.println(dhcp1.toString()+ "\n" );
 		System.out.println(dhcp2.toString()+ "\n" );
 		System.out.println(dhcp3.toString()+ "\n" );
 		System.out.println(dhcp4.toString()+ "\n" );
 		System.out.println(dhcp5.toString()+ "\n" );
-		System.out.println(dhcp6.toString());
+		System.out.println(dhcp6.toString());*/
 		
 	}
 

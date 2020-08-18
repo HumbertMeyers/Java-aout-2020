@@ -74,8 +74,13 @@ public class DhcpController {
 		try {
 			model.setParamDHCP(dns, router, masque);
 		} catch  (Exception e){
-			System.out.println("Catch enregistrer config DHCP");
+			gui.show("Catch enregistrer config DHCP");
 		}
+	}
+	
+	public void viderDHCP() {
+		model.clearUsedIP();
+		
 	}
 	
 }

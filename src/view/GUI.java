@@ -55,8 +55,8 @@ public class GUI implements ActionListener, Observer {
 	private JButton vue_Clients;
 	private JButton exitButton;
 	
-	private JTextField Infos_Client1;
-	private JTextField Infos_Client2;
+	private JTextArea Infos_Client1;
+	private JTextArea Infos_Client2;
 	private JButton newIpBoutton_1;
 
 	private JButton newIpBoutton_2;
@@ -79,6 +79,9 @@ public class GUI implements ActionListener, Observer {
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
+	private JButton enregistreDHCP_1;
+
+	private JButton ClearDHCP;
 	
 	
 	
@@ -139,83 +142,6 @@ public class GUI implements ActionListener, Observer {
 		popUpIP = new JOptionPane();
 		
 		
-		retourBoutton = new JButton("Retour Menu");
-		retourBoutton.addActionListener(this);
-		retourBoutton.setBounds(688, 719, 131, 23);
-		frame.getContentPane().add(retourBoutton);
-		retourBoutton.setVisible(false);		
-		
-		
-		Client_1 = new JPanel();
-		Client_1.setBackground(Color.WHITE);
-		Client_1.setBounds(10, 10, 809, 330);
-		frame.getContentPane().add(Client_1);
-		Client_1.setLayout(null);
-		Client_1.setVisible(false);
-		
-		Client_2 = new JPanel();
-		Client_2.setBackground(Color.WHITE);
-		Client_2.setBounds(10, 350, 809, 330);
-		frame.getContentPane().add(Client_2);
-		Client_2.setLayout(null);
-		Client_2.setVisible(false);
-		
-		
-		newIpBoutton_1 = new JButton("Nouvelle Adresse IP");
-		newIpBoutton_1.addActionListener(this);
-		newIpBoutton_1.setBounds(10, 296, 279, 23);
-		Client_1.add(newIpBoutton_1);
-		
-		log_1 = new JPanel();
-		log_1.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		log_1.setBounds(10, 11, 279, 274);
-		Client_1.add(log_1);
-		log_1.setLayout(null);
-		
-		textArea_1 = new JTextArea();
-		textArea_1.setEditable(false);
-		textArea_1.setBounds(10, 22, 259, 241);
-		log_1.add(textArea_1);
-		
-		Infos_Client1 = new JTextField();
-		Infos_Client1.setEditable(false);
-		Infos_Client1.setBounds(328, 11, 471, 274);
-		Client_1.add(Infos_Client1);
-		Infos_Client1.setColumns(10);
-		
-		Accepter_1 = new JButton("Accepter");
-		Accepter_1.addActionListener(this);
-		Accepter_1.setBounds(710, 296, 89, 23);
-		Client_1.add(Accepter_1);
-		
-		newIpBoutton_2 = new JButton("Nouvelle Adresse IP");
-		newIpBoutton_2.addActionListener(this);
-		newIpBoutton_2.setBounds(10, 296, 279, 23);
-		Client_2.add(newIpBoutton_2);
-		
-		log_2 = new JPanel();
-		log_2.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		log_2.setBounds(10, 11, 279, 274);
-		Client_2.add(log_2);
-		log_2.setLayout(null);
-		
-		textArea_2 = new JTextArea();
-		textArea_2.setEditable(false);
-		textArea_2.setBounds(10, 22, 259, 241);
-		log_2.add(textArea_2);
-		
-		Infos_Client2 = new JTextField();
-		Infos_Client2.setEditable(false);
-		Infos_Client2.setBounds(328, 11, 471, 274);
-		Client_2.add(Infos_Client2);
-		Infos_Client2.setColumns(10);
-		
-		Accepter_2 = new JButton("Accepter");
-		Accepter_2.addActionListener(this);
-		Accepter_2.setBounds(710, 296, 89, 23);
-		Client_2.add(Accepter_2);
-		
-		
 		Menu = new JPanel();
 		Menu.setBounds(0, 0, 829, 753);
 		frame.getContentPane().add(Menu);
@@ -235,6 +161,17 @@ public class GUI implements ActionListener, Observer {
 		exitButton = new JButton("Quitter");
 		exitButton.setBounds(322, 351, 163, 23);
 		Menu.add(exitButton);
+		
+		vue_Clients.addActionListener(this);
+		
+		exitButton.addActionListener(this);
+		
+		
+		retourBoutton = new JButton("Retour Menu");
+		retourBoutton.addActionListener(this);
+		retourBoutton.setBounds(688, 719, 131, 23);
+		frame.getContentPane().add(retourBoutton);
+		retourBoutton.setVisible(false);		
 		
 		MenuDHCP = new JPanel();
 		MenuDHCP.setBounds(0, 0, 829, 753);
@@ -284,11 +221,84 @@ public class GUI implements ActionListener, Observer {
 		lblNewLabel_2 = new JLabel("ex : 24 pour un /24");
 		lblNewLabel_2.setBounds(483, 290, 110, 14);
 		MenuDHCP.add(lblNewLabel_2);
+		
+		ClearDHCP = new JButton("Reinitialiser DHCP");
+		ClearDHCP.addActionListener(this);
+		ClearDHCP.setBounds(321, 418, 123, 23);
+		MenuDHCP.add(ClearDHCP);
 		MenuDHCP.setVisible(false);
 		
-		vue_Clients.addActionListener(this);
 		
-		exitButton.addActionListener(this);
+		Client_1 = new JPanel();
+		Client_1.setBackground(Color.WHITE);
+		Client_1.setBounds(10, 10, 809, 330);
+		frame.getContentPane().add(Client_1);
+		Client_1.setLayout(null);
+		Client_1.setVisible(false);
+		
+		
+		newIpBoutton_1 = new JButton("Nouvelle Adresse IP");
+		newIpBoutton_1.addActionListener(this);
+		newIpBoutton_1.setBounds(10, 296, 279, 23);
+		Client_1.add(newIpBoutton_1);
+		
+		log_1 = new JPanel();
+		log_1.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		log_1.setBounds(10, 11, 279, 274);
+		Client_1.add(log_1);
+		log_1.setLayout(null);
+		
+		textArea_1 = new JTextArea();
+		textArea_1.setEditable(false);
+		textArea_1.setBounds(10, 22, 259, 241);
+		log_1.add(textArea_1);
+		
+		Infos_Client1 = new JTextArea();
+		Infos_Client1.setBackground(Color.LIGHT_GRAY);
+		Infos_Client1.setEditable(false);
+		Infos_Client1.setBounds(328, 11, 471, 274);
+		Client_1.add(Infos_Client1);
+		Infos_Client1.setColumns(10);
+		
+		Accepter_1 = new JButton("Accepter");
+		Accepter_1.addActionListener(this);
+		Accepter_1.setBounds(710, 296, 89, 23);
+		Client_1.add(Accepter_1);
+		
+		Client_2 = new JPanel();
+		Client_2.setBackground(Color.WHITE);
+		Client_2.setBounds(10, 350, 809, 330);
+		frame.getContentPane().add(Client_2);
+		Client_2.setLayout(null);
+		Client_2.setVisible(false);
+		
+		newIpBoutton_2 = new JButton("Nouvelle Adresse IP");
+		newIpBoutton_2.addActionListener(this);
+		newIpBoutton_2.setBounds(10, 296, 279, 23);
+		Client_2.add(newIpBoutton_2);
+		
+		log_2 = new JPanel();
+		log_2.setBorder(new TitledBorder(null, "Console avec le serveur", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		log_2.setBounds(10, 11, 279, 274);
+		Client_2.add(log_2);
+		log_2.setLayout(null);
+		
+		textArea_2 = new JTextArea();
+		textArea_2.setEditable(false);
+		textArea_2.setBounds(10, 22, 259, 241);
+		log_2.add(textArea_2);
+		
+		Infos_Client2 = new JTextArea();
+		Infos_Client2.setBackground(Color.LIGHT_GRAY);
+		Infos_Client2.setEditable(false);
+		Infos_Client2.setBounds(328, 11, 471, 274);
+		Client_2.add(Infos_Client2);
+		Infos_Client2.setColumns(10);
+		
+		Accepter_2 = new JButton("Accepter");
+		Accepter_2.addActionListener(this);
+		Accepter_2.setBounds(710, 296, 89, 23);
+		Client_2.add(Accepter_2);
 
 	}
 	
@@ -335,13 +345,30 @@ public class GUI implements ActionListener, Observer {
 	    else if (source == enregistreDHCP) {
 	    	controller.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
 	    	show("Bien enregistré");
-	    }	    
+	    }
+	    else if (source == ClearDHCP){
+	    	controller.viderDHCP();
+	    	controller.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
+	    	Infos_Client1.setText("");
+	    	Infos_Client2.setText("");
+	    }
 	    else if (source == Accepter_1) {
+	    	if(textArea_1.getText().equals(Infos_Client2.getText())) {
+	    		Infos_Client1.setText("Un autre ordinateur possède déjà cette ip");
+	    	}else {
+	    		Infos_Client1.setText(textArea_1.getText());
+	    	}
+	    	
 	    	
 	    }
 	    else if (source == Accepter_2) {
+	    	if(textArea_2.getText().equals(Infos_Client1.getText())) {
+	    		Infos_Client2.setText("Un autre ordinateur possède déjà cette ip");
+	    	}else {
+	    		Infos_Client2.setText(textArea_2.getText());
+	    	}
+	    	
 	    }
-	    else {}
 	}
 	
 	public void afficheInfoIPClient(int clientNum, String res) {
@@ -352,17 +379,8 @@ public class GUI implements ActionListener, Observer {
 			textArea_2.setText(res);
 		}
 	}
-
-	public void addObserver(Observer obs) {
-		
-	}
-	public void removeObserver() {
-		
-	}
-	public void notifyObserver(String str) {
-	}
 	
 	public void update(String str) {
-		Infos_Client1.setText(Infos_Client1.getText() + "\n" + str);
+		Infos_Client1.setText(str);
 	}
 }
