@@ -125,7 +125,7 @@ public class GUI implements ActionListener, Observer {
 	 * @param MsgCréationIp
 	 */
 	public void show(String MsgCréationIp) {
-		JOptionPane.showMessageDialog(null, MsgCréationIp, "Retour création IP", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, MsgCréationIp, "Pop-Up informative", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -302,6 +302,19 @@ public class GUI implements ActionListener, Observer {
 
 	}
 	
+	public void afficheInfoIPClient(int clientNum, String res) {
+		if (clientNum == 1) {
+			textArea_1.setText(res);
+		}
+		if (clientNum == 2) {
+			textArea_2.setText(res);
+		}
+	}
+	
+	public void update(String str) {
+		Infos_Client1.setText(str);
+	}
+	
 	/**
 	 * Les actions lorsqu'on clique sur un bouton
 	 */
@@ -343,8 +356,15 @@ public class GUI implements ActionListener, Observer {
 	    	System.out.println(result);
 	    }
 	    else if (source == enregistreDHCP) {
-	    	controller.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
-	    	show("Bien enregistré");
+	    	int res = controller.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
+	    	if(res == 0) { show("Bien enregistré"); }
+	    	if(res == 1) { 
+	    		show("config DHCP non enregistrée car problème avec le dns ou le router");
+	    		textField.setText("");
+	    		textField_1.setText("");
+	    		textField_2.setText("");	
+	    	}
+	    	if(res==2) {show("Catch enregistrer config DHCP\nLa configuration par défaut est prise car vous n'avez rien défini");}
 	    }
 	    else if (source == ClearDHCP){
 	    	controller.viderDHCP();
@@ -369,18 +389,5 @@ public class GUI implements ActionListener, Observer {
 	    	}
 	    	
 	    }
-	}
-	
-	public void afficheInfoIPClient(int clientNum, String res) {
-		if (clientNum == 1) {
-			textArea_1.setText(res);
-		}
-		if (clientNum == 2) {
-			textArea_2.setText(res);
-		}
-	}
-	
-	public void update(String str) {
-		Infos_Client1.setText(str);
 	}
 }

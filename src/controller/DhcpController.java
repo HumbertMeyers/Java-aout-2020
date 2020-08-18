@@ -70,11 +70,17 @@ public class DhcpController {
 	 * @param router l'adresse IP du router sous forme de String
 	 * @param masque le masque de sous réseau sous forme de Integer
 	 */
-	public void enregistrerDhcpConfig(String dns, String router, String masque) {
-		try {
-			model.setParamDHCP(dns, router, masque);
-		} catch  (Exception e){
-			gui.show("Catch enregistrer config DHCP");
+	public int enregistrerDhcpConfig(String dns, String router, String masque) {
+		if(dns.equals("255.255.255.0")||router.equals("255.255.255.0")) {
+			return 1;
+		}
+		else {
+			try {
+				model.setParamDHCP(dns, router, masque);
+				return 0;
+			} catch  (Exception e){
+				return 2;
+			}
 		}
 	}
 	
