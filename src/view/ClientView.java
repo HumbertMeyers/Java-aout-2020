@@ -46,7 +46,7 @@ public class ClientView implements Observer{
 		this.model = model;
 		this.controller = controller;
 		this.update(null, null);
-		this.scan = new Scanner(System.in);
+		//this.scan = new Scanner(System.in);
 		
 		/* TODO Menu disposant de :
 		 * 			1. Config DHCP

@@ -23,7 +23,6 @@ public class IP{
 	 */
 	protected int masque;
 	
-
 	/**
 	 * Ce constructeur initialise une adresse IP de type APIPA (169.254.x.x avec comme masque 255.255.0.0).
 	 */

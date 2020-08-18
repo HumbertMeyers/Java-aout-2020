@@ -4,13 +4,13 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Observable;
+import model.Observable;
 
 /**
  * @author Humbert Meyers
  *
  */
-public class ModelDHCP extends Observable {
+public class ModelDHCP extends AbstractMVCModel {
 	
 	/**
 	 * Les variables
@@ -19,7 +19,7 @@ public class ModelDHCP extends Observable {
 	 * router : l'adresse IP du router sous forme de String
 	 * masque : le masque de sous réseau sous forme de Integer
 	 */
-	private static DHCP dhcp;
+	private DHCP dhcp;
 	public String dns;
 	public String router;
 	public int masque;
@@ -70,6 +70,18 @@ public class ModelDHCP extends Observable {
 				return 1;
 			}
 		}
+	}
+	
+	/**
+	 * Cette fonction vérifie que le String entré correspond bien au pattern "xxx.xxx.xxx.xxx"
+	 * @param ip une adresse IP sous forme de String
+	 * @return true si correspondant sinon false
+	 */
+	public static boolean validate(final String ip) {
+		//PATTERN correspond à la Regex générique d'une adresse ip pouvant aller de 0.0.0.0 à 255.255.255.255
+	 	String PATTERN = 
+	 			"^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+	    return ip.matches(PATTERN);
 	}
 
 	/**

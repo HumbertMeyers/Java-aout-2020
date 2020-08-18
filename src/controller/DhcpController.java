@@ -16,7 +16,6 @@ import view.*;
 public class DhcpController {
 	
 	public static ModelDHCP model;
-	protected ServerView cli;
 	protected GUI gui;
 	
 	
@@ -38,22 +37,17 @@ public class DhcpController {
 		int resultIP = model.donneIP(router, ip, masque, dns);
 		switch(resultIP) {
 			case 0: 
-				cli.show("Configuration IP effectuée.");
 				gui.show("Configuration IP effectuée.");
 				break;
 			case 1:	
-				cli.show("Adresse IP déja existante.");
 				gui.show("Adresse IP déja existante.");
 				break;
 			case 2:	
-				cli.show("Erreur dans la configuration IP.");
 				gui.show("Erreur dans la configuration IP.");
 				break;
 			default: 
 				break;
-		}
-		
-		
+		}	
 	}
 	
 	public static void main(String[] args) {
@@ -65,7 +59,6 @@ public class DhcpController {
 				// TODO Auto-generated method stub
 				ModelDHCP model = new ModelDHCP();
 				DhcpController DC = new DhcpController(model);
-				ServerView cli = new ServerView(model, DC);
 				GUI gui = new GUI();
 				
 			}
@@ -83,38 +76,5 @@ public class DhcpController {
 		model.dns = dns;
 		model.router = router;
 		model.masque = Integer.parseInt(masque);
-	}
-
-	/**
-	 * Cette fonction change la vue en CLI lorsqu'on clique sur un bouton en GUI
-	 * @param str la valeur du bouton cliqué
-	 */
-	public static void changerVue(String str) {
-		System.out.println("--- \n");
-		switch (str) {
-			case "vueMenu" : 
-				ReadInput.show(ReadInput.MENUP_STRING);
-				break;
-			case "vueClient" :
-				ReadInput.show(ReadInput.MENUCLIENT_STRING);
-				break;
-			case "vueDHCP" :
-				ReadInput.show(ReadInput.MENUDHCP_STRING);
-				break;
-			/*case "vueDHCP" :
-				ReadInput.show(ReadInput.MENUDHCP_STRING);
-				break;
-			case "vueDHCP" :
-				ReadInput.show(ReadInput.MENUDHCP_STRING);
-				break;
-			case "vueDHCP" :
-				ReadInput.show(ReadInput.MENUDHCP_STRING);
-				break;
-			case "vueDHCP" :
-				ReadInput.show(ReadInput.MENUDHCP_STRING);
-				break;*/
-			default:
-				break;
-		}
 	}
 }

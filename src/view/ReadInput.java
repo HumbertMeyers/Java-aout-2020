@@ -16,7 +16,16 @@ public class ReadInput implements Runnable {
 	
 	Scanner scan;
 	int client = 0;
+	public static int i = 0;
 	public static boolean isVueClient = false;
+	public static boolean inMenuP;
+	public static boolean inMenuDHCP ;
+	public static boolean inMenuClient;
+	public static boolean inMenuChoixClient;
+	public static boolean inMenuDORA ;
+	public static boolean isIpRouterOk ;
+	public static boolean isMasqueOk;
+	public static boolean isIpDNSOk ;
 	
 	
 	/**
@@ -120,31 +129,33 @@ public class ReadInput implements Runnable {
 			String ipDNS = "";
 			
 			// REQUEST THE NUMBER OF HOSTS NEEDED TO THE USER
-			boolean inMenuP = true;
-			boolean inMenuDHCP = false;
-			boolean inMenuClient = false;
-			boolean inMenuChoixClient = false;
-			boolean inMenuDORA = false;
-			boolean isIpRouterOk = false;
-			boolean isMasqueOk = false;
-			boolean isIpDNSOk = false;
+			inMenuP = true;
+			inMenuDHCP = false;
+			inMenuClient = false;
+			inMenuChoixClient = false;
+			inMenuDORA = false;
+			isIpRouterOk = false;
+			isMasqueOk = false;
+			isIpDNSOk = false;
 			
 			while(inMenuP) {
 				printMenuP();
-				switch(scan.nextInt()) {
-					case 1: 
-						show(MENUDHCP_STRING);
-						inMenuP = false;
-						inMenuDHCP = true;
-						break;
-					case 2: 
-						show(MENUCLIENT_STRING);
-						inMenuP = false;
-						inMenuClient = true;
-						break;
-					case 3: System.exit(0);
-					default: System.out.println("Mauvaise entrée.");
+				System.out.println("test");
+				if (scan.hasNextInt()) {
+					i = scan.nextInt();
 				}
+				if (i == 1) {
+					show(MENUDHCP_STRING);
+					inMenuP = false;
+					inMenuDHCP = true;
+				}
+				if (i == 2) {
+					show(MENUCLIENT_STRING);
+					inMenuP = false;
+					inMenuClient = true;
+				}
+				if(i == 3) { System.exit(0);}
+				System.out.println("test2");
 			}
 			while(inMenuDHCP) {
 				isIpRouterOk = false;

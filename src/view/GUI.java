@@ -3,6 +3,11 @@
  */
 package view;
 
+import controller.DhcpController;
+import model.ModelDHCP;
+import model.Observer;
+import model.Observable;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,15 +22,10 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
-import java.util.Observable;
-import java.util.Observer;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
-
-import controller.DhcpController;
-import model.ModelDHCP;
 
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -42,7 +42,6 @@ import javax.swing.JTextField;
  * @author Humbert Meyers
  *
  */
-@SuppressWarnings("deprecation")
 public class GUI implements ActionListener, Observer {
 
 	private JFrame frame;
@@ -200,7 +199,7 @@ public class GUI implements ActionListener, Observer {
 		
 		enregistreDHCP = new JButton("Enregistrer");
 		enregistreDHCP.addActionListener(this);
-		enregistreDHCP.setBounds(338, 365, 89, 23);
+		enregistreDHCP.setBounds(321, 365, 123, 23);
 		MenuDHCP.add(enregistreDHCP);
 		
 		lblNewLabel = new JLabel("ex : 192.168.1.1");
@@ -301,14 +300,12 @@ public class GUI implements ActionListener, Observer {
 			Menu.setVisible(false);
 			vue_Clients.setEnabled(true);
 			retourBoutton.setVisible(true);
-	    	DhcpController.changerVue("vueDHCP");
 	    }
 	    else if (source == vue_Clients) {
 	    	Client_1.setVisible(true);
 			Client_2.setVisible(true);
 			Menu.setVisible(false);
 			retourBoutton.setVisible(true);
-			DhcpController.changerVue("vueClient");
 	    }
 	    else if (source == exitButton) {
 	    	System.exit(0);
@@ -330,7 +327,6 @@ public class GUI implements ActionListener, Observer {
 	    }
 	    else if (source == enregistreDHCP) {
 	    	DhcpController.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
-	    	update(null, source);
 	    }	    
 	    else if (source == Accepter_1) {
 	    	
@@ -349,26 +345,7 @@ public class GUI implements ActionListener, Observer {
 	public void notifyObserver(String str) {
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
-		frame.pack();
-		if (o instanceof ModelDHCP && "newIpBoutton_1".equals(arg)) {
-			notifyObserver("");
-			show("Client 1 : Bonjour, je cherche à recevoir une adresse IP");
-        }
-		if (o instanceof ModelDHCP && "newIpBoutton_2".equals(arg)) {
-			show("Client 2 : Bonjour, je cherche à recevoir une adresse IP");
-        }
-		if (o instanceof ModelDHCP && "Accepter_1".equals(arg)) {
-			show("Client 1 : adresse IP OK");
-        }
-		if (o instanceof ModelDHCP && "Accepter_2".equals(arg)) {
-			show("Client 2 : adresse IP OK");
-        }
-		if (o instanceof ModelDHCP && "enregistreDHCP".equals(arg)) {
-			show("DHCP : Paramètres DHCP bien enregistrés");
-			ReadInput.isVueClient = true;
-        }
-		
+	public void update(String str) {
+		Infos_Client1.setText(Infos_Client1.getText() + "\n" + str);
 	}
 }
