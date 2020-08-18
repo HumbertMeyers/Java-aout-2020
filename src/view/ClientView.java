@@ -22,6 +22,10 @@ public class ClientView implements Observer{
 	protected ModelDHCP model;
 	protected DhcpController controller;
 	
+	
+	/**
+	 * Les différents menus possibles
+	 */
 	private static final String menuP = ""
 			+ "1. Config DHCP\n"
 			+ "2. Config Client\n"
@@ -36,13 +40,14 @@ public class ClientView implements Observer{
 			+ "2.2. Retour\n";
 
 	/**
-	 * 
+	 * Le constructeur
 	 */
 	public ClientView(ModelDHCP model, DhcpController controller) {
 		this.model = model;
 		this.controller = controller;
 		this.update(null, null);
 		this.scan = new Scanner(System.in);
+		
 		/* TODO Menu disposant de :
 		 * 			1. Config DHCP
 		 *			 	1.1 Vue Config DHCP

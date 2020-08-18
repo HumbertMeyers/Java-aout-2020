@@ -67,6 +67,16 @@ public class GUI implements ActionListener, Observer {
 	private JButton retourBoutton;
 	
 	JOptionPane popUpIP;
+	private JPanel MenuDHCP;
+	private JTextField textField;
+	private JLabel routeur;
+	private JTextField textField_1;
+	private JLabel masque;
+	private JTextField textField_2;
+	private JButton enregistreDHCP;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
 	
 	
 	/**
@@ -103,6 +113,10 @@ public class GUI implements ActionListener, Observer {
 		initialize();
 	}
 	
+	/**
+	 * affiche une popUp lorsque la création d'une adresse ip est faite.
+	 * @param MsgCréationIp
+	 */
 	public void show(String MsgCréationIp) {
 		popUpIP.showMessageDialog(null, MsgCréationIp, "Retour création IP", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -116,8 +130,13 @@ public class GUI implements ActionListener, Observer {
 		//frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("Simulateur ludique d'un DHCP");
 		
 		popUpIP = new JOptionPane();
+		
+		
+		retourBoutton = new JButton("Retour Menu");
+		retourBoutton.addActionListener(this);
 		
 		
 		Menu = new JPanel();
@@ -133,6 +152,7 @@ public class GUI implements ActionListener, Observer {
 		
 		vue_Clients = new JButton("Config Client");
 		vue_Clients.setBounds(322, 316, 163, 23);
+		vue_Clients.setEnabled(false);
 		Menu.add(vue_Clients);
 		
 		exitButton = new JButton("Quitter");
@@ -142,6 +162,59 @@ public class GUI implements ActionListener, Observer {
 		vue_Clients.addActionListener(this);
 		
 		exitButton.addActionListener(this);
+		retourBoutton.setBounds(688, 719, 131, 23);
+		frame.getContentPane().add(retourBoutton);
+		retourBoutton.setVisible(false);		
+		
+		MenuDHCP = new JPanel();
+		MenuDHCP.setBounds(0, 0, 829, 753);
+		frame.getContentPane().add(MenuDHCP);
+		MenuDHCP.setLayout(null);
+		
+		textField = new JTextField("");
+		textField.setBounds(219, 52, 123, 17);
+		MenuDHCP.add(textField);
+		textField.setColumns(10);
+		
+		JLabel DNS = new JLabel("DNS");
+		DNS.setBounds(83, 55, 93, 14);
+		MenuDHCP.add(DNS);
+		
+		routeur = new JLabel("Routeur");
+		routeur.setBounds(83, 93, 93, 14);
+		MenuDHCP.add(routeur);
+		
+		textField_1 = new JTextField("");
+		textField_1.setColumns(10);
+		textField_1.setBounds(219, 90, 123, 17);
+		MenuDHCP.add(textField_1);
+		
+		masque = new JLabel("Masque");
+		masque.setBounds(83, 136, 46, 14);
+		MenuDHCP.add(masque);
+		
+		textField_2 = new JTextField("");
+		textField_2.setBounds(219, 133, 86, 20);
+		MenuDHCP.add(textField_2);
+		textField_2.setColumns(10);
+		
+		enregistreDHCP = new JButton("Enregistrer");
+		enregistreDHCP.addActionListener(this);
+		enregistreDHCP.setBounds(83, 220, 89, 23);
+		MenuDHCP.add(enregistreDHCP);
+		
+		lblNewLabel = new JLabel("ex : 192.168.1.1");
+		lblNewLabel.setBounds(381, 54, 46, 14);
+		MenuDHCP.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("ex : 192.168.1.1");
+		lblNewLabel_1.setBounds(381, 93, 46, 14);
+		MenuDHCP.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("ex : 24 pour un /24");
+		lblNewLabel_2.setBounds(381, 136, 46, 14);
+		MenuDHCP.add(lblNewLabel_2);
+		MenuDHCP.setVisible(false);
 		
 		
 		Client_1 = new JPanel();
@@ -212,22 +285,23 @@ public class GUI implements ActionListener, Observer {
 		Accepter_2.addActionListener(this);
 		Accepter_2.setBounds(710, 296, 89, 23);
 		Client_2.add(Accepter_2);
-		
-		
-		retourBoutton = new JButton("Retour Menu");
-		retourBoutton.addActionListener(this);
-		retourBoutton.setBounds(688, 719, 131, 23);
-		frame.getContentPane().add(retourBoutton);
-		retourBoutton.setVisible(false);		
 
 	}
 	
+	/**
+	 * Les actions lorsqu'on clique sur un bouton
+	 */
 	public void actionPerformed(ActionEvent e) {
 		Object  source = e.getSource();
 	    if  (source == vue_DHCP){
+	    	MenuDHCP.setVisible(true);
+	    	Client_1.setVisible(false);
+			Client_2.setVisible(false);
+			
+			Menu.setVisible(false);
+			vue_Clients.setEnabled(true);
+			retourBoutton.setVisible(true);
 	    	DhcpController.changerVue("vueDHCP");
-	    }
-	    else if (source == retourBoutton) {
 	    }
 	    else if (source == vue_Clients) {
 	    	Client_1.setVisible(true);
@@ -240,9 +314,10 @@ public class GUI implements ActionListener, Observer {
 	    	System.exit(0);
 	    }
 	    else if (source == retourBoutton) {
+	    	Menu.setVisible(true);
+	    	MenuDHCP.setVisible(false);
 	    	Client_1.setVisible(false);
 			Client_2.setVisible(false);
-			Menu.setVisible(true);
 			retourBoutton.setVisible(false);
 	    }
 	    else if (source == newIpBoutton_1) {
@@ -253,14 +328,16 @@ public class GUI implements ActionListener, Observer {
 	    	int result = DhcpController.model.doraDemande();
 	    	System.out.println(result);
 	    }
+	    else if (source == enregistreDHCP) {
+	    	DhcpController.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
+	    	update(null, source);
+	    }	    
 	    else if (source == Accepter_1) {
 	    	
 	    }
 	    else if (source == Accepter_2) {
 	    }
-	    else {
-	    	
-	    }
+	    else {}
 	}
 
 	public void addObserver(Observer obs) {
@@ -270,14 +347,28 @@ public class GUI implements ActionListener, Observer {
 		
 	}
 	public void notifyObserver(String str) {
-		
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		frame.pack();
 		if (o instanceof ModelDHCP && "newIpBoutton_1".equals(arg)) {
-			show("Yeh !!");
+			notifyObserver("");
+			show("Client 1 : Bonjour, je cherche à recevoir une adresse IP");
         }
+		if (o instanceof ModelDHCP && "newIpBoutton_2".equals(arg)) {
+			show("Client 2 : Bonjour, je cherche à recevoir une adresse IP");
+        }
+		if (o instanceof ModelDHCP && "Accepter_1".equals(arg)) {
+			show("Client 1 : adresse IP OK");
+        }
+		if (o instanceof ModelDHCP && "Accepter_2".equals(arg)) {
+			show("Client 2 : adresse IP OK");
+        }
+		if (o instanceof ModelDHCP && "enregistreDHCP".equals(arg)) {
+			show("DHCP : Paramètres DHCP bien enregistrés");
+			ReadInput.isVueClient = true;
+        }
+		
 	}
 }

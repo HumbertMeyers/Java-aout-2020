@@ -23,7 +23,7 @@ public class ServerView implements Observer{
 	protected DhcpController controller;
 	
 	/**
-	 * 
+	 * Le constructeur 
 	 */
 	public ServerView(ModelDHCP model, DhcpController controller) {
 		this.model = model;
@@ -49,6 +49,11 @@ public class ServerView implements Observer{
 		*/
 	}
 	
+	
+	/**
+	 * Affiche en console un String
+	 * @param string le string que l'on veut afficher en console
+	 */
 	public void show(String string) {
 		System.out.println(string);
 	}

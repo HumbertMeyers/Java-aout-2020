@@ -23,6 +23,19 @@ public class IP{
 	 */
 	protected int masque;
 	
+
+	/**
+	 * Ce constructeur initialise une adresse IP de type APIPA (169.254.x.x avec comme masque 255.255.0.0).
+	 */
+	public IP(int masque) {
+		
+		this.ipAdr = new int[] {1,1,1,1};
+		for (int i = 0; i <= 3; i++){
+	        this.ipAdr[i]= (int)(Math.random()*255);
+	    }
+
+		this.masque = masque;	
+	}
 	
 	/**
 	 * Ce constructeur initialise une adresse IP de type APIPA (169.254.x.x avec comme masque 255.255.0.0).
@@ -118,6 +131,11 @@ public class IP{
 				.replace(" ", "");
 	}
 	
+	/**
+	 * Transforme un masque sous forme de String "xxx.xxx.xxx.xxx" en Integer
+	 * @param masque
+	 * @return un integer
+	 */
 	public int getMasqueInt(String masque) {
 		int masqueInt = 0;
 		String byteStr = "";
