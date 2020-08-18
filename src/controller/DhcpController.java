@@ -59,7 +59,7 @@ public class DhcpController {
 				// TODO Auto-generated method stub
 				ModelDHCP model = new ModelDHCP();
 				DhcpController DC = new DhcpController(model);
-				GUI gui = new GUI();
+				GUI gui = new GUI(DC);
 				
 			}
 			
@@ -72,9 +72,11 @@ public class DhcpController {
 	 * @param router l'adresse IP du router sous forme de String
 	 * @param masque le masque de sous réseau sous forme de Integer
 	 */
-	public static void enregistrerDhcpConfig(String dns, String router, String masque) {
-		model.dns = dns;
-		model.router = router;
-		model.masque = Integer.parseInt(masque);
+	public void enregistrerDhcpConfig(String dns, String router, String masque) {
+		try {
+			model.setParamDHCP(dns, router, masque);
+		} catch  (Exception e){
+			System.out.println("Catch enregistrer config DHCP");
+		}
 	}
 }

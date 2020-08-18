@@ -44,6 +44,8 @@ import javax.swing.JTextField;
  */
 public class GUI implements ActionListener, Observer {
 
+	private DhcpController controller;
+	
 	private JFrame frame;
 	private JPanel Client_1;
 	private JPanel Client_2;
@@ -78,6 +80,7 @@ public class GUI implements ActionListener, Observer {
 	private JLabel lblNewLabel_2;
 	
 	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -97,7 +100,7 @@ public class GUI implements ActionListener, Observer {
 	/**
 	 * Create the application.
 	 */
-	public GUI() {
+	public GUI(DhcpController controller) {
 		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -107,6 +110,7 @@ public class GUI implements ActionListener, Observer {
 				}
 			}
 		});*/
+		this.controller = controller;
 		frame = new JFrame();
 		this.frame.setVisible(true);
 		initialize();
@@ -117,7 +121,7 @@ public class GUI implements ActionListener, Observer {
 	 * @param MsgCréationIp
 	 */
 	public void show(String MsgCréationIp) {
-		popUpIP.showMessageDialog(null, MsgCréationIp, "Retour création IP", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, MsgCréationIp, "Retour création IP", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -326,7 +330,8 @@ public class GUI implements ActionListener, Observer {
 	    	System.out.println(result);
 	    }
 	    else if (source == enregistreDHCP) {
-	    	DhcpController.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
+	    	controller.enregistrerDhcpConfig(textField.getText(),textField_1.getText(), textField_2.getText());
+	    	show("Bien enregistré");
 	    }	    
 	    else if (source == Accepter_1) {
 	    	

@@ -32,6 +32,17 @@ public class ModelDHCP extends AbstractMVCModel {
 		this.dhcp = new DHCP();
 	}
 	
+	public void setParamDHCP(String dns, String router, String masque) {
+		this.dns = dns;
+		this.router = router;
+		this.masque = Integer.parseInt(masque);
+		
+		notifyObserver(this.dns);
+		notifyObserver(this.router);
+		notifyObserver(masque);
+	}
+	
+	
 	/**
 	 * Cette fonction gère la demande d'une adresse IP.
 	 * @return une adresse IP sous forme de string.
