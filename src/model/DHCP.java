@@ -33,10 +33,34 @@ public class DHCP extends IP{
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns.
 	 */
 	public DHCP() {
-		super("192.168.1.1", 24);
+		super(24);
 		this.ipRouter = string2Integer("192.168.1.1");
+		this.ipAdr = IpBaseeSurRouter(this.ipRouter);
 		this.ipDNS = string2Integer("192.168.1.1");
 		this.usedIP.add("0.0.0.0");
+	}
+	
+	public DHCP(String router) {
+		super(24);
+		this.ipRouter = string2Integer(router);
+		this.ipAdr = IpBaseeSurRouter(this.ipRouter);
+		this.ipDNS = string2Integer("192.168.1.1");
+		this.usedIP.add("0.0.0.0");
+	}
+	
+	public int[] IpBaseeSurRouter(int[] ipRouter) {
+		ipAdr = ipRouter;
+		while(contain(usedIP, getIpAdr(ipAdr))) {
+			ipAdr[3]++;
+		}
+		return ipAdr;
+	}
+	
+	public boolean contain(ArrayList<String> tab, String chaine) {
+		for (String s : tab) {
+			if (s.equals(chaine)) {return true;}
+		}
+		return false;
 	}
 	
 	/**

@@ -58,6 +58,7 @@ public class GUI implements ActionListener, Observer {
 	private JTextField Infos_Client1;
 	private JTextField Infos_Client2;
 	private JButton newIpBoutton_1;
+
 	private JButton newIpBoutton_2;
 	private JPanel log_1;
 	private JPanel log_2;
@@ -140,84 +141,9 @@ public class GUI implements ActionListener, Observer {
 		
 		retourBoutton = new JButton("Retour Menu");
 		retourBoutton.addActionListener(this);
-		
-		
-		Menu = new JPanel();
-		Menu.setBounds(0, 0, 829, 753);
-		frame.getContentPane().add(Menu);
-		Menu.setLayout(null);
-		
-		vue_DHCP = new JButton("Config DHCP");
-		vue_DHCP.setBounds(322, 282, 163, 23);
-		Menu.add(vue_DHCP);
-		
-		vue_DHCP.addActionListener(this);
-		
-		vue_Clients = new JButton("Config Client");
-		vue_Clients.setBounds(322, 316, 163, 23);
-		vue_Clients.setEnabled(false);
-		Menu.add(vue_Clients);
-		
-		exitButton = new JButton("Quitter");
-		exitButton.setBounds(322, 351, 163, 23);
-		Menu.add(exitButton);
-		
-		vue_Clients.addActionListener(this);
-		
-		exitButton.addActionListener(this);
 		retourBoutton.setBounds(688, 719, 131, 23);
 		frame.getContentPane().add(retourBoutton);
 		retourBoutton.setVisible(false);		
-		
-		MenuDHCP = new JPanel();
-		MenuDHCP.setBounds(0, 0, 829, 753);
-		frame.getContentPane().add(MenuDHCP);
-		MenuDHCP.setLayout(null);
-		
-		textField = new JTextField("");
-		textField.setBounds(321, 199, 123, 23);
-		MenuDHCP.add(textField);
-		textField.setColumns(10);
-		
-		JLabel DNS = new JLabel("DNS");
-		DNS.setBounds(185, 202, 93, 14);
-		MenuDHCP.add(DNS);
-		
-		routeur = new JLabel("Routeur");
-		routeur.setBounds(185, 247, 93, 14);
-		MenuDHCP.add(routeur);
-		
-		textField_1 = new JTextField("");
-		textField_1.setColumns(10);
-		textField_1.setBounds(321, 244, 123, 23);
-		MenuDHCP.add(textField_1);
-		
-		masque = new JLabel("Masque");
-		masque.setBounds(185, 290, 46, 14);
-		MenuDHCP.add(masque);
-		
-		textField_2 = new JTextField("");
-		textField_2.setBounds(321, 286, 123, 23);
-		MenuDHCP.add(textField_2);
-		textField_2.setColumns(10);
-		
-		enregistreDHCP = new JButton("Enregistrer");
-		enregistreDHCP.addActionListener(this);
-		enregistreDHCP.setBounds(321, 365, 123, 23);
-		MenuDHCP.add(enregistreDHCP);
-		
-		lblNewLabel = new JLabel("ex : 192.168.1.1");
-		lblNewLabel.setBounds(483, 201, 110, 14);
-		MenuDHCP.add(lblNewLabel);
-		
-		lblNewLabel_1 = new JLabel("ex : 192.168.1.1");
-		lblNewLabel_1.setBounds(483, 247, 110, 14);
-		MenuDHCP.add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("ex : 24 pour un /24");
-		lblNewLabel_2.setBounds(483, 290, 110, 14);
-		MenuDHCP.add(lblNewLabel_2);
-		MenuDHCP.setVisible(false);
 		
 		
 		Client_1 = new JPanel();
@@ -288,6 +214,81 @@ public class GUI implements ActionListener, Observer {
 		Accepter_2.addActionListener(this);
 		Accepter_2.setBounds(710, 296, 89, 23);
 		Client_2.add(Accepter_2);
+		
+		
+		Menu = new JPanel();
+		Menu.setBounds(0, 0, 829, 753);
+		frame.getContentPane().add(Menu);
+		Menu.setLayout(null);
+		
+		vue_DHCP = new JButton("Config DHCP");
+		vue_DHCP.setBounds(322, 282, 163, 23);
+		Menu.add(vue_DHCP);
+		
+		vue_DHCP.addActionListener(this);
+		
+		vue_Clients = new JButton("Config Client");
+		vue_Clients.setBounds(322, 316, 163, 23);
+		vue_Clients.setEnabled(false);
+		Menu.add(vue_Clients);
+		
+		exitButton = new JButton("Quitter");
+		exitButton.setBounds(322, 351, 163, 23);
+		Menu.add(exitButton);
+		
+		MenuDHCP = new JPanel();
+		MenuDHCP.setBounds(0, 0, 829, 753);
+		frame.getContentPane().add(MenuDHCP);
+		MenuDHCP.setLayout(null);
+		
+		textField = new JTextField("");
+		textField.setBounds(321, 199, 123, 23);
+		MenuDHCP.add(textField);
+		textField.setColumns(10);
+		
+		JLabel DNS = new JLabel("DNS");
+		DNS.setBounds(185, 202, 93, 14);
+		MenuDHCP.add(DNS);
+		
+		routeur = new JLabel("Routeur");
+		routeur.setBounds(185, 247, 93, 14);
+		MenuDHCP.add(routeur);
+		
+		textField_1 = new JTextField("");
+		textField_1.setColumns(10);
+		textField_1.setBounds(321, 244, 123, 23);
+		MenuDHCP.add(textField_1);
+		
+		masque = new JLabel("Masque");
+		masque.setBounds(185, 290, 46, 14);
+		MenuDHCP.add(masque);
+		
+		textField_2 = new JTextField("");
+		textField_2.setBounds(321, 286, 123, 23);
+		MenuDHCP.add(textField_2);
+		textField_2.setColumns(10);
+		
+		enregistreDHCP = new JButton("Enregistrer");
+		enregistreDHCP.addActionListener(this);
+		enregistreDHCP.setBounds(321, 365, 123, 23);
+		MenuDHCP.add(enregistreDHCP);
+		
+		lblNewLabel = new JLabel("ex : 192.168.1.1");
+		lblNewLabel.setBounds(483, 201, 110, 14);
+		MenuDHCP.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("ex : 192.168.1.1");
+		lblNewLabel_1.setBounds(483, 247, 110, 14);
+		MenuDHCP.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("ex : 24 pour un /24");
+		lblNewLabel_2.setBounds(483, 290, 110, 14);
+		MenuDHCP.add(lblNewLabel_2);
+		MenuDHCP.setVisible(false);
+		
+		vue_Clients.addActionListener(this);
+		
+		exitButton.addActionListener(this);
 
 	}
 	
@@ -322,11 +323,13 @@ public class GUI implements ActionListener, Observer {
 			retourBoutton.setVisible(false);
 	    }
 	    else if (source == newIpBoutton_1) {
-	    	int result = DhcpController.model.doraDemande();
+	    	String result = controller.model.doraDemande();
+	    	afficheInfoIPClient(1 ,result);
 	    	System.out.println(result);
 	    }
 	    else if (source == newIpBoutton_2) {
-	    	int result = DhcpController.model.doraDemande();
+	    	String result = controller.model.doraDemande();
+	    	afficheInfoIPClient(2, result);
 	    	System.out.println(result);
 	    }
 	    else if (source == enregistreDHCP) {
@@ -339,6 +342,15 @@ public class GUI implements ActionListener, Observer {
 	    else if (source == Accepter_2) {
 	    }
 	    else {}
+	}
+	
+	public void afficheInfoIPClient(int clientNum, String res) {
+		if (clientNum == 1) {
+			textArea_1.setText(res);
+		}
+		if (clientNum == 2) {
+			textArea_2.setText(res);
+		}
 	}
 
 	public void addObserver(Observer obs) {

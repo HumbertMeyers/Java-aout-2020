@@ -34,18 +34,16 @@ public class DhcpController {
 	 * @param dns l'adresse IP du DNS sous forme de String
 	 */
 	public void donneIP(String router, String ip, int masque, String dns) {
-		int resultIP = model.donneIP(router, ip, masque, dns);
+		String resultIP = model.donneIP(router, ip, masque, dns);
 		switch(resultIP) {
-			case 0: 
-				gui.show("Configuration IP effectuée.");
-				break;
-			case 1:	
+			case "IP déjà utilisée":	
 				gui.show("Adresse IP déja existante.");
 				break;
-			case 2:	
+			case "Erreur dans la demande DORA":	
 				gui.show("Erreur dans la configuration IP.");
 				break;
 			default: 
+				gui.show("Configuration IP effectuée.");
 				break;
 		}	
 	}
@@ -79,4 +77,5 @@ public class DhcpController {
 			System.out.println("Catch enregistrer config DHCP");
 		}
 	}
+	
 }

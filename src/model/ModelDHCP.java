@@ -35,8 +35,9 @@ public class ModelDHCP extends AbstractMVCModel {
 	public void setParamDHCP(String dns, String router, String masque) {
 		this.dns = dns;
 		this.router = router;
+		dhcp.setUsedIP(dns);
+		dhcp.setUsedIP(router);
 		this.masque = Integer.parseInt(masque);
-		
 		notifyObserver(this.dns);
 		notifyObserver(this.router);
 		notifyObserver(masque);
@@ -47,14 +48,15 @@ public class ModelDHCP extends AbstractMVCModel {
 	 * Cette fonction gère la demande d'une adresse IP.
 	 * @return une adresse IP sous forme de string.
 	 */
-	public int doraDemande() {
-		dhcp = new DHCP();
-		String router = dhcp.getIpRouter();
-		String dns = dhcp.getIpDNS();
-		int masque = dhcp.getMasqueInt("255.255.255.0");
+	public String doraDemande() {
+		//dhcp = new DHCP(this.router);
+		dhcp.setIpRouter(dhcp.string2Integer(this.router));
+		dhcp.setIpDNS(dhcp.string2Integer(this.dns));
+		dhcp.setMasque(this.masque);
 		String ip = dhcp.getIpAdr();
-		int newIp = donneIP(router, ip, masque, dns);
+		String newIp = donneIP(this.router, ip, this.masque, this.dns);
 		return newIp;
+		//notify
 	}
 	
 	/**
@@ -65,10 +67,10 @@ public class ModelDHCP extends AbstractMVCModel {
 	 * @param dns l'adresse IP du DNS sous forme de String
 	 * @return un Integer en fonction de l'existance de l'adresse IP du client ou non dans l' ArrayList<String> usedIP 
 	 */
-	public int donneIP(String router, String ip, int masque, String dns) {
+	public String donneIP(String router, String ip, int masque, String dns) {
 		if(isIpUtilisee(ip)) {
 			System.out.println(ip.toString());
-			return 2;
+			return "IP déjà utilisée";
 		}
 		else {
 			try {
@@ -76,11 +78,21 @@ public class ModelDHCP extends AbstractMVCModel {
 				if(!isIpUtilisee(router)) {dhcp.setUsedIP(router);}
 				dhcp.setUsedIP(ip);
 				System.out.println(ip.toString());
-				return 0;
+				return concatInfos(dns, router, masque, ip); // DNS, routeur , masque, IP
 			} catch (Exception e) {
-				return 1;
+				return "Erreur dans la demande DORA";
 			}
 		}
+	}
+	
+	
+	public String concatInfos(String dns, String router, int masque, String ip) {
+		String conca = "DNS : " + dns 
+				+ "\nPasserelle par défaut : " + router
+				+ "\nMasque de sous-réseau : " + masque
+				+ "\nAdresse IPv4 proposée : " + ip;
+		
+		return conca;
 	}
 	
 	/**
