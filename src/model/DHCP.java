@@ -48,38 +48,6 @@ public class DHCP extends IP{
 		this.usedIP.add("0.0.0.0");
 	}
 	
-	public int[] IpBaseeSurRouter(int[] ipRouter) {
-		int [] ipAdr = ipRouter;
-		int temp = ipAdr[3];
-		boolean flag = true;
-		
-		while(flag) 
-			if(contain(usedIP, getIpAdr(ipAdr))) {
-				ipAdr[3] += 1;
-				//System.out.println(getIpAdr(ipAdr));
-				if(ipAdr[3] == temp) {
-					ipAdr[0] = 0; ipAdr[1] = 0; ipAdr[2]=0; ipAdr[3] = 0;
-					return ipAdr;
-				}
-				if(ipAdr[3] == 255) {
-					ipAdr[3] = 1;
-				}
-				
-			}
-			
-			else {
-				flag = false;
-			}
-		return ipAdr;
-	}
-	
-	public boolean contain(ArrayList<String> tab, String chaine) {
-		for (String s : tab) {
-			if (s.equals(chaine)) {return true;}
-		}
-		return false;
-	}
-	
 	/**
 	 * Ce constructeur donne une adresse IP avec un masque, un routeur et un dns.
 	 * Il assigne la valeur donnée à l'adresse IP aux routeur et au DNS
@@ -137,6 +105,47 @@ public class DHCP extends IP{
 				Integer.parseInt(ipArray[2]),
 				Integer.parseInt(ipArray[3])
 		};
+	}
+
+	/**
+	 * Cette fonction retourne une IP d'un client grace à l'ip du router
+	 * @param ipRouter
+	 * @return l'ip d'un client
+	 */
+	public int[] IpBaseeSurRouter(int[] ipRouter) {
+		int [] ipAdr = ipRouter;
+		int temp = ipAdr[3];
+		boolean flag = true;
+		
+		while(flag) 
+			if(contain(usedIP, getIpAdr(ipAdr))) {
+				ipAdr[3] += 1;
+				//System.out.println(getIpAdr(ipAdr));
+				if(ipAdr[3] == temp) {
+					ipAdr[0] = 0; ipAdr[1] = 0; ipAdr[2]=0; ipAdr[3] = 0;
+					return ipAdr;
+				}
+				if(ipAdr[3] == 255) {
+					ipAdr[3] = 1;
+				}
+			}
+			else {
+				flag = false;
+			}
+		return ipAdr;
+	}
+	
+	/**
+	 * Cette méthode vérifie si l'
+	 * @param tab
+	 * @param chaine
+	 * @return
+	 */
+	public boolean contain(ArrayList<String> tab, String chaine) {
+		for (String s : tab) {
+			if (s.equals(chaine)) {return true;}
+		}
+		return false;
 	}
 	
 	/**
@@ -209,6 +218,10 @@ public class DHCP extends IP{
 				.replace(" ", "");
 	}
 
+	/**
+	 * Cette méthode retourne un objet de type IP
+	 * @return retourne un objet de type IP sous forme de string
+	 */
 	public String getIP() {
 		IP ip = new IP();
 		return ip.toString();
@@ -223,20 +236,19 @@ public class DHCP extends IP{
 				+ "Serveur DNS.............: " + getIpDNS();
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		DHCP dhcp1 = new DHCP();
 		DHCP dhcp2 = new DHCP("172.16.2.1", "172.16.2.253",23,"172.16.2.1");
 		DHCP dhcp3 = new DHCP("192.168.1.1","192.168.1.2",24);
 		DHCP dhcp4 = new DHCP("10.8.1.254","10.8.2.127",25,"8.8.8.8");
 		DHCP dhcp5 = new DHCP("172.16.255.254","172.16.255.253",16,"172.168.2.1");
 		DHCP dhcp6 = new DHCP("192.168.99.1", 24);
-		/*System.out.println(dhcp1.toString()+ "\n" );
+		System.out.println(dhcp1.toString()+ "\n" );
 		System.out.println(dhcp2.toString()+ "\n" );
 		System.out.println(dhcp3.toString()+ "\n" );
 		System.out.println(dhcp4.toString()+ "\n" );
 		System.out.println(dhcp5.toString()+ "\n" );
-		System.out.println(dhcp6.toString());*/
-		
-	}
+		System.out.println(dhcp6.toString());
+	}*/
 
 }

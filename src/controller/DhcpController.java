@@ -48,22 +48,6 @@ public class DhcpController {
 		}	
 	}
 	
-	public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				ModelDHCP model = new ModelDHCP();
-				DhcpController DC = new DhcpController(model);
-				GUI gui = new GUI(DC);
-				
-			}
-			
-		});
-	}
-	
 	/**
 	 * Cette fonction enregistre la configuration du DHCP
 	 * @param dns l'adresse IP du DNS sous forme de String
@@ -87,6 +71,22 @@ public class DhcpController {
 	public void viderDHCP() {
 		model.clearUsedIP();
 		
+	}
+	
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ModelDHCP model = new ModelDHCP();
+				DhcpController DC = new DhcpController(model);
+				GUI gui = new GUI(DC);
+				
+			}
+			
+		});
 	}
 	
 }

@@ -180,10 +180,8 @@ public class IP{
 				+ "Masque : " + getMasque();
 	}
 	
-	//public abstract int[] string2Integer(String addr);
-	
-	public static void main(String[] args) {
-		/*
+	/*public static void main(String[] args) {
+		
 		IP adresse1 = new IP("192.168.1.2",24);
 		System.out.println(adresse1.toString());
 		IP adresse2 = new IP("192.168.1.254", 16);
@@ -196,7 +194,6 @@ public class IP{
 		System.out.println(apipa2.toString());
 		IP apipa3 = new IP();
 		System.out.println(apipa3.toString());
-		*/
-	}
+	}*/
 	
 }
