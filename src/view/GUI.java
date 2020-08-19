@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import java.awt.Panel;
+import java.awt.Window;
+
 import javax.swing.Box;
 import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
@@ -22,6 +24,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
@@ -33,6 +36,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.FlowLayout;
 import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
 import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -42,8 +46,14 @@ import javax.swing.JTextField;
  * @author Humbert Meyers
  *
  */
-public class GUI implements ActionListener, Observer {
-
+public class GUI extends SerieTemps implements ActionListener, Observer {
+	
+	
+	/**
+	 * @param text
+	 * @return
+	 */
+	
 	private DhcpController controller;
 	
 	private JFrame frame;
@@ -82,6 +92,8 @@ public class GUI implements ActionListener, Observer {
 	private JLabel exempleMasque;
 
 	public JOptionPane popUpIP;
+
+	private JButton GetTemps;
 
 	/**
 	 * Create the application.
@@ -144,6 +156,11 @@ public class GUI implements ActionListener, Observer {
 		exitButton = new JButton("Quitter");
 		exitButton.setBounds(322, 351, 163, 23);
 		Menu.add(exitButton);
+		
+		GetTemps = new JButton("Retourner la SerieTemps");
+		GetTemps.addActionListener(this);
+		GetTemps.setBounds(322, 385, 163, 23);
+		Menu.add(GetTemps);
 		
 		vue_Clients.addActionListener(this);
 		
@@ -303,6 +320,7 @@ public class GUI implements ActionListener, Observer {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		Object  source = e.getSource();
+		addEvent(((AbstractButton) source).getText());
 	    if  (source == vue_DHCP){
 	    	MenuDHCP.setVisible(true);
 	    	Client_1.setVisible(false);
@@ -368,7 +386,9 @@ public class GUI implements ActionListener, Observer {
 	    	}else {
 	    		Infos_Client2.setText(textArea_2.getText());
 	    	}
-	    	
 	    }
+	    else if(source == GetTemps) {
+    		show(this.toString());
+    	}
 	}
 }
