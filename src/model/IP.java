@@ -25,6 +25,7 @@ public class IP{
 	
 	/**
 	 * Ce constructeur initialise une adresse IP de type APIPA (169.254.x.x avec comme masque 255.255.0.0).
+	 * @param masque un int compris entre 0 et 32
 	 */
 	public IP(int masque) {
 		
@@ -55,7 +56,6 @@ public class IP{
 	/**
 	 * Ce constructeur initialise une adresse IP avec les paramètres addr et masque.
 	 * @param addr : l'adresse IP reçue en paramètre.
-	 * @param masque : le masque de réseau reçu en paramètre.
 	 */
 	public IP(String addr) {
 		String[] ipArray;
@@ -132,7 +132,7 @@ public class IP{
 	
 	/**
 	 * Transforme un masque sous forme de String "xxx.xxx.xxx.xxx" en Integer
-	 * @param masque
+	 * @param masque string sous forme "xxx.xxx.xxx.xxx"
 	 * @return un integer
 	 */
 	public int getMasqueInt(String masque) {

@@ -83,27 +83,9 @@ public class GUI implements ActionListener, Observer {
 
 	public JOptionPane popUpIP;
 
-	
-	
-	
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
 	/**
 	 * Create the application.
+	 * @param controller le controller
 	 */
 	public GUI(DhcpController controller) {
 		/*EventQueue.invokeLater(new Runnable() {
@@ -122,8 +104,8 @@ public class GUI implements ActionListener, Observer {
 	}
 	
 	/**
-	 * affiche une popUp lorsque la création d'une adresse ip est faite.
-	 * @param MsgCréationIp
+	 * affiche une popUp informative.
+	 * @param MsgCréationIp le message à afficher dans la popUp informative
 	 */
 	public void show(String MsgCréationIp) {
 		JOptionPane.showMessageDialog(null, MsgCréationIp, "Pop-Up informative", JOptionPane.INFORMATION_MESSAGE);

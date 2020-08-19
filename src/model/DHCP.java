@@ -109,7 +109,7 @@ public class DHCP extends IP{
 
 	/**
 	 * Cette fonction retourne une IP d'un client grace à l'ip du router
-	 * @param ipRouter
+	 * @param ipRouter l'ip du router
 	 * @return l'ip d'un client
 	 */
 	public int[] IpBaseeSurRouter(int[] ipRouter) {
@@ -136,10 +136,10 @@ public class DHCP extends IP{
 	}
 	
 	/**
-	 * Cette méthode vérifie si l'
-	 * @param tab
-	 * @param chaine
-	 * @return
+	 * Cette méthode vérifie si le String est présent dans l'ArrayList
+	 * @param tab un ArrayList
+	 * @param chaine un String
+	 * @return boolean en fonction de la présence du String dans l'ArrayList
 	 */
 	public boolean contain(ArrayList<String> tab, String chaine) {
 		for (String s : tab) {

@@ -21,6 +21,7 @@ public class DhcpController {
 	
 	/**
 	 * Le constructeur.
+	 * @param model le modelDHCP
 	 */
 	public DhcpController(ModelDHCP model) {
 		this.model = model;
@@ -53,6 +54,7 @@ public class DhcpController {
 	 * @param dns l'adresse IP du DNS sous forme de String
 	 * @param router l'adresse IP du router sous forme de String
 	 * @param masque le masque de sous réseau sous forme de Integer
+	 * @return un int en fonction de l'enregistrement ou non du dhcp
 	 */
 	public int enregistrerDhcpConfig(String dns, String router, String masque) {
 		if(dns.equals("255.255.255.0")||router.equals("255.255.255.0")) {

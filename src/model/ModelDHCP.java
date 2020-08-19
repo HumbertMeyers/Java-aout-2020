@@ -67,7 +67,7 @@ public class ModelDHCP extends AbstractMVCModel {
 	 * @param ip l'adresse IP du client sous forme de String
 	 * @param masque le masque de sous réseau sous forme de Integer
 	 * @param dns l'adresse IP du DNS sous forme de String
-	 * @return un Integer en fonction de l'existance de l'adresse IP du client ou non dans l' ArrayList<String> usedIP 
+	 * @return un Integer en fonction de l'existance de l'adresse IP du client ou non dans l' ArrayList usedIP 
 	 */
 	public String donneIP(String router, String ip, int masque, String dns) {
 		if(isIpUtilisee(ip)) {
@@ -112,7 +112,7 @@ public class ModelDHCP extends AbstractMVCModel {
 
 	/**
 	 * Récupère les adresses IP existantes du modele DHCP
-	 * @return ArrayList<String> usedIP
+	 * @return ArrayList usedIP
 	 */
 	public ArrayList<String> getUsedIP() {
 		return dhcp.usedIP;
@@ -122,7 +122,7 @@ public class ModelDHCP extends AbstractMVCModel {
 	 * Recherche un String dans un ArrayList de String
 	 * @param tab une ArrayList de String
 	 * @param chaine un String recherché
-	 * @return
+	 * @return boolean en fonction de la présence de la chaine dans l'arrayList
 	 */
 	public boolean contain(ArrayList<String> tab, String chaine) {
 		for (String s : tab) {
