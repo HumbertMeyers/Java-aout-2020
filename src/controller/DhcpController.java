@@ -85,7 +85,6 @@ public class DhcpController {
 				ModelDHCP model = new ModelDHCP();
 				DhcpController DC = new DhcpController(model);
 				GUI gui = new GUI(DC);
-				
 			}
 			
 		});
